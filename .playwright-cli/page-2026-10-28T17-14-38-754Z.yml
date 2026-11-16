@@ -1,0 +1,445 @@
+- generic [ref=f2e2]:
+  - link "Saltar al contenido" [ref=f2e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f2e4]:
+    - generic [ref=f2e5]:
+      - link "Liceo Profesional Laprida" [ref=f2e6] [cursor=pointer]:
+        - /url: /
+      - navigation "Navegación principal" [ref=f2e8]:
+        - link "Inicio" [ref=f2e9] [cursor=pointer]:
+          - /url: "#inicio"
+        - link "Cursos" [ref=f2e10] [cursor=pointer]:
+          - /url: "#catalogo"
+        - link "Ofertas" [ref=f2e11] [cursor=pointer]:
+          - /url: "#ofertas"
+        - link "La institución" [ref=f2e12] [cursor=pointer]:
+          - /url: "#institucion"
+        - link "Experiencias" [ref=f2e13] [cursor=pointer]:
+          - /url: "#alumnos"
+        - link "Contacto" [ref=f2e14] [cursor=pointer]:
+          - /url: "#contacto"
+      - generic [ref=f2e15]:
+        - button "Abrir preinscripción" [ref=f2e16] [cursor=pointer]
+        - link "Preinscribirme" [ref=f2e20] [cursor=pointer]:
+          - /url: /inscripcion
+  - main [ref=f2e21]:
+    - generic [ref=f2e22]:
+      - generic [ref=f2e26]:
+        - heading "Aprendé un oficio. Empezá algo propio." [level=1] [ref=f2e27]
+        - paragraph [ref=f2e28]: Formación práctica, horarios flexibles y herramientas para salir a trabajar.
+        - generic [ref=f2e29]:
+          - link "Explorar cursos" [ref=f2e30] [cursor=pointer]:
+            - /url: "#catalogo"
+          - link "Consultar por WhatsApp" [ref=f2e33] [cursor=pointer]:
+            - /url: https://wa.me/542645808222
+      - generic [ref=f2e34]:
+        - generic [ref=f2e35]: Inscripciones abiertas
+        - generic [ref=f2e36]: Centro de San Juan
+        - generic [ref=f2e37]: Turnos mañana, tarde y noche
+    - generic [ref=f2e39]:
+      - generic [ref=f2e40]:
+        - generic [ref=f2e41]:
+          - paragraph [ref=f2e42]: Elegí tu próximo oficio
+          - heading "Encontrá el curso que se adapta a vos." [level=2] [ref=f2e43]
+        - generic [ref=f2e44]:
+          - strong [ref=f2e45]: 8 áreas
+          - paragraph [ref=f2e46]: Explorá cada campo, compará propuestas y elegí una formación que puedas convertir en trabajo.
+      - generic "Filtrar por área de formación" [ref=f2e47]:
+        - button "Gastronomía 3 cursos" [pressed] [ref=f2e48] [cursor=pointer]:
+          - generic [ref=f2e55]:
+            - strong [ref=f2e56]: Gastronomía
+            - generic [ref=f2e57]: 3 cursos
+        - button "Belleza 3 cursos" [ref=f2e58] [cursor=pointer]:
+          - generic [ref=f2e65]:
+            - strong [ref=f2e66]: Belleza
+            - generic [ref=f2e67]: 3 cursos
+        - button "Técnica 3 cursos" [ref=f2e68] [cursor=pointer]:
+          - generic [ref=f2e74]:
+            - strong [ref=f2e75]: Técnica
+            - generic [ref=f2e76]: 3 cursos
+        - button "S.L.P. 4 cursos" [ref=f2e77] [cursor=pointer]:
+          - generic [ref=f2e82]:
+            - strong [ref=f2e83]: S.L.P.
+            - generic [ref=f2e84]: 4 cursos
+        - button "Administración 9 cursos" [ref=f2e85] [cursor=pointer]:
+          - generic [ref=f2e91]:
+            - strong [ref=f2e92]: Administración
+            - generic [ref=f2e93]: 9 cursos
+        - button "Salud 5 cursos" [ref=f2e94] [cursor=pointer]:
+          - generic [ref=f2e99]:
+            - strong [ref=f2e100]: Salud
+            - generic [ref=f2e101]: 5 cursos
+        - button "Nutr. y Deporte 3 cursos" [ref=f2e102] [cursor=pointer]:
+          - generic [ref=f2e107]:
+            - strong [ref=f2e108]: Nutr. y Deporte
+            - generic [ref=f2e109]: 3 cursos
+        - button "Informática 5 cursos" [ref=f2e110] [cursor=pointer]:
+          - generic [ref=f2e116]:
+            - strong [ref=f2e117]: Informática
+            - generic [ref=f2e118]: 5 cursos
+      - generic [ref=f2e119]:
+        - generic [ref=f2e120]:
+          - generic [ref=f2e121]: ¿Qué querés aprender?
+          - searchbox "¿Qué querés aprender?" [ref=f2e122]
+        - generic [ref=f2e123]:
+          - generic [ref=f2e124]: Duración
+          - combobox "Duración" [ref=f2e125]:
+            - option "Todas" [selected]
+            - option "Hasta 3 meses"
+            - option "De 4 a 6 meses"
+            - option "7 meses o más"
+        - generic [ref=f2e126]:
+          - generic [ref=f2e127]: Ordenar
+          - combobox "Ordenar" [ref=f2e128]:
+            - option "Recomendados" [selected]
+            - option "Nombre A–Z"
+            - option "Menor duración"
+            - option "Menor cuota"
+      - generic [ref=f2e129]:
+        - paragraph [ref=f2e130]:
+          - strong [ref=f2e131]: "3"
+          - text: propuestas disponibles
+        - button "Limpiar filtros" [ref=f2e132] [cursor=pointer]
+      - generic [ref=f2e133]:
+        - article [ref=f2e134]:
+          - link [ref=f2e135] [cursor=pointer]:
+            - /url: /cursos/pasteleria-emprendimiento
+          - generic [ref=f2e136]:
+            - text: Gastronomía
+            - heading [level=3] [ref=f2e137]:
+              - link "Pastelería para emprendimiento" [ref=f2e138] [cursor=pointer]:
+                - /url: /cursos/pasteleria-emprendimiento
+            - paragraph [ref=f2e139]: Aprendé recetas rentables, costos y presentación para abrir tu propia pastelería o vender por encargo.
+            - generic [ref=f2e140]:
+              - generic [ref=f2e141]: 3 meses
+              - generic [ref=f2e142]: Presencial
+              - generic [ref=f2e143]: $ 48.000 / mes
+          - generic [ref=f2e144]:
+            - link "Ver detalles" [ref=f2e145] [cursor=pointer]:
+              - /url: /cursos/pasteleria-emprendimiento
+            - button "Preinscribirme" [ref=f2e146] [cursor=pointer]
+        - article [ref=f2e147]:
+          - link [ref=f2e148] [cursor=pointer]:
+            - /url: /cursos/panaderia-artesanal
+          - generic [ref=f2e149]:
+            - text: Gastronomía
+            - heading [level=3] [ref=f2e150]:
+              - link "Panadería artesanal" [ref=f2e151] [cursor=pointer]:
+                - /url: /cursos/panaderia-artesanal
+            - paragraph [ref=f2e152]: Panes de masa madre, facturas y piezas de mostrador con técnica profesional de obrador.
+            - generic [ref=f2e153]:
+              - generic [ref=f2e154]: 4 meses
+              - generic [ref=f2e155]: Presencial
+              - generic [ref=f2e156]: $ 46.000 / mes
+          - generic [ref=f2e157]:
+            - link "Ver detalles" [ref=f2e158] [cursor=pointer]:
+              - /url: /cursos/panaderia-artesanal
+            - button "Preinscribirme" [ref=f2e159] [cursor=pointer]
+        - article [ref=f2e160]:
+          - link [ref=f2e161] [cursor=pointer]:
+            - /url: /cursos/cocina-profesional
+          - generic [ref=f2e162]:
+            - text: Gastronomía
+            - heading [level=3] [ref=f2e163]:
+              - link "Cocina profesional" [ref=f2e164] [cursor=pointer]:
+                - /url: /cursos/cocina-profesional
+            - paragraph [ref=f2e165]: Fundamentos de cocina para ingresar a un restaurante, un hotel o un servicio de catering.
+            - generic [ref=f2e166]:
+              - generic [ref=f2e167]: 6 meses
+              - generic [ref=f2e168]: Presencial
+              - generic [ref=f2e169]: $ 52.000 / mes
+          - generic [ref=f2e170]:
+            - link "Ver detalles" [ref=f2e171] [cursor=pointer]:
+              - /url: /cursos/cocina-profesional
+            - button "Preinscribirme" [ref=f2e172] [cursor=pointer]
+    - generic [ref=f2e174]:
+      - generic [ref=f2e176]:
+        - paragraph [ref=f2e177]: Oportunidades de este mes
+        - heading "Empezá con un precio especial." [level=2] [ref=f2e178]
+      - generic [ref=f2e179]:
+        - article [ref=f2e180]:
+          - generic [ref=f2e181]: 20% menos
+          - generic [ref=f2e183]:
+            - paragraph [ref=f2e184]: Salida laboral rápida
+            - heading "Excel profesional" [level=3] [ref=f2e185]
+            - paragraph [ref=f2e186]: 2 meses · Noche
+            - generic [ref=f2e187]:
+              - generic [ref=f2e188]:
+                - text: Precio especial hasta
+                - time [ref=f2e189]: 8 NOV
+              - generic [ref=f2e190]:
+                - text: Inicio
+                - time [ref=f2e191]: 12 NOV
+            - generic [ref=f2e192]:
+              - deletion [ref=f2e193]: Antes $ 42.000
+              - strong [ref=f2e194]: $ 34.000
+              - generic [ref=f2e195]: por mes
+            - button "Elegir oferta e inscribirme" [ref=f2e196] [cursor=pointer]
+        - article [ref=f2e197]:
+          - generic [ref=f2e198]: 15% menos
+          - generic [ref=f2e200]:
+            - paragraph [ref=f2e201]: Cupos limitados
+            - heading "Auxiliar de farmacia" [level=3] [ref=f2e202]
+            - paragraph [ref=f2e203]: 5 meses · Tarde
+            - generic [ref=f2e204]:
+              - generic [ref=f2e205]:
+                - text: Precio especial hasta
+                - time [ref=f2e206]: 12 NOV
+              - generic [ref=f2e207]:
+                - text: Inicio
+                - time [ref=f2e208]: 18 NOV
+            - generic [ref=f2e209]:
+              - deletion [ref=f2e210]: Antes $ 52.000
+              - strong [ref=f2e211]: $ 44.000
+              - generic [ref=f2e212]: por mes
+            - button "Elegir oferta e inscribirme" [ref=f2e213] [cursor=pointer]
+        - article [ref=f2e214]:
+          - generic [ref=f2e215]: 18% menos
+          - generic [ref=f2e217]:
+            - paragraph [ref=f2e218]: Para emprender
+            - heading "Pastelería para emprendimiento" [level=3] [ref=f2e219]
+            - paragraph [ref=f2e220]: 3 meses · Tarde
+            - generic [ref=f2e221]:
+              - generic [ref=f2e222]:
+                - text: Precio especial hasta
+                - time [ref=f2e223]: 15 NOV
+              - generic [ref=f2e224]:
+                - text: Inicio
+                - time [ref=f2e225]: 22 NOV
+            - generic [ref=f2e226]:
+              - deletion [ref=f2e227]: Antes $ 48.000
+              - strong [ref=f2e228]: $ 39.000
+              - generic [ref=f2e229]: por mes
+            - button "Elegir oferta e inscribirme" [ref=f2e230] [cursor=pointer]
+      - paragraph [ref=f2e231]: Promociones sujetas a vigencia y cupos. La sede confirma disponibilidad antes de completar la inscripción.
+    - generic [ref=f2e232]:
+      - text: HACER
+      - generic [ref=f2e233]:
+        - generic [ref=f2e234]:
+          - paragraph [ref=f2e235]: Aprender haciendo
+          - heading "El oficio se aprende haciéndolo." [level=2] [ref=f2e236]
+          - paragraph [ref=f2e237]: Práctica guiada, herramientas reales y docentes presentes en cada paso.
+          - generic [ref=f2e238]:
+            - link "Conocer experiencias" [ref=f2e239] [cursor=pointer]:
+              - /url: "#alumnos"
+            - link "Iniciar preinscripción" [ref=f2e240] [cursor=pointer]:
+              - /url: /inscripcion
+        - generic "Alumnos aprendiendo en clases prácticas" [ref=f2e241]:
+          - figure "Práctica desde la primera clase" [ref=f2e242]:
+            - img "Estudiantes adultos trabajando en una clase práctica de cocina" [ref=f2e243]
+          - figure "Docentes presentes" [ref=f2e245]:
+            - img "Docente de gastronomía explicando una técnica frente a sus alumnos" [ref=f2e246]
+          - figure "Aprender con otros" [ref=f2e248]:
+            - img "Grupo de estudiantes adultos compartiendo una actividad" [ref=f2e249]
+        - generic [ref=f2e251]:
+          - article [ref=f2e252]:
+            - strong [ref=f2e253]: Grupos cercanos
+            - generic [ref=f2e254]: acompañamiento real
+          - article [ref=f2e255]:
+            - strong [ref=f2e256]: Herramientas reales
+            - generic [ref=f2e257]: práctica concreta
+          - article [ref=f2e258]:
+            - strong [ref=f2e259]: Horarios posibles
+            - generic [ref=f2e260]: estudiá y trabajá
+    - generic [ref=f2e262]:
+      - generic [ref=f2e263]:
+        - paragraph [ref=f2e264]: Experiencias de alumnos
+        - heading "Lo aprendido se reconoce cuando empieza a usarse." [level=2] [ref=f2e265]: Lo aprendido se reconocecuando empieza a usarse.
+        - paragraph [ref=f2e266]: Historias breves de personas que eligieron una formación concreta para avanzar en su trabajo.
+      - generic "Reseñas de alumnos en movimiento continuo" [ref=f2e267]:
+        - generic [ref=f2e268]:
+          - generic [ref=f2e269]:
+            - blockquote [ref=f2e270]:
+              - generic "5 de 5 estrellas" [ref=f2e271]
+              - paragraph [ref=f2e282]: “Los profesores de electricidad enseñan de verdad. Salís sabiendo cablear, no recitando el reglamento de memoria.”
+              - generic [ref=f2e283]:
+                - generic [ref=f2e284]: "01"
+                - generic [ref=f2e285]:
+                  - strong [ref=f2e286]: Diego R.
+                  - generic [ref=f2e287]: Electricista instalador · Marzo 2026
+            - blockquote [ref=f2e288]:
+              - generic "5 de 5 estrellas" [ref=f2e289]
+              - paragraph [ref=f2e300]: “Hice preceptora y el trato fue excelente. El curso me abrió la puerta a la escuela.”
+              - generic [ref=f2e301]:
+                - generic [ref=f2e302]: "02"
+                - generic [ref=f2e303]:
+                  - strong [ref=f2e304]: Lucía P.
+                  - generic [ref=f2e305]: Preceptora · Febrero 2026
+            - blockquote [ref=f2e306]:
+              - generic "5 de 5 estrellas" [ref=f2e307]
+              - paragraph [ref=f2e318]: “Las prácticas en salud marcan la diferencia. Entendés el ritmo de una clínica antes de pedir trabajo.”
+              - generic [ref=f2e319]:
+                - generic [ref=f2e320]: "03"
+                - generic [ref=f2e321]:
+                  - strong [ref=f2e322]: Mariana G.
+                  - generic [ref=f2e323]: Auxiliar de farmacia · Noviembre 2025
+            - blockquote [ref=f2e324]:
+              - generic "4 de 5 estrellas" [ref=f2e325]
+              - paragraph [ref=f2e336]: “Horario nocturno y herramientas en serio. En tres meses ya estaba saliendo a domicilios con un colega.”
+              - generic [ref=f2e337]:
+                - generic [ref=f2e338]: "04"
+                - generic [ref=f2e339]:
+                  - strong [ref=f2e340]: Pablo S.
+                  - generic [ref=f2e341]: Refrigeración y aire · Octubre 2025
+            - blockquote [ref=f2e342]:
+              - generic "5 de 5 estrellas" [ref=f2e343]
+              - paragraph [ref=f2e354]: “Aprendí costos, no solo recetas. Hoy vendo por encargo y el certificado me sirvió para el local.”
+              - generic [ref=f2e355]:
+                - generic [ref=f2e356]: "05"
+                - generic [ref=f2e357]:
+                  - strong [ref=f2e358]: Carla M.
+                  - generic [ref=f2e359]: Pastelería para emprendimiento · Agosto 2025
+            - blockquote [ref=f2e360]:
+              - generic "4 de 5 estrellas" [ref=f2e361]
+              - paragraph [ref=f2e372]: "“Iba a un curso más caro en Capital. Acá el docente va al caso: planillas que se usan en una oficina de San Juan.”"
+              - generic [ref=f2e373]:
+                - generic [ref=f2e374]: "06"
+                - generic [ref=f2e375]:
+                  - strong [ref=f2e376]: Hernán V.
+                  - generic [ref=f2e377]: Excel y administración · Julio 2025
+          - generic [aria-hidden] [ref=f2e378]:
+            - blockquote [ref=f2e379]:
+              - paragraph [ref=f2e391]: “Los profesores de electricidad enseñan de verdad. Salís sabiendo cablear, no recitando el reglamento de memoria.”
+              - generic [ref=f2e392]:
+                - generic [ref=f2e393]: "01"
+                - generic [ref=f2e394]:
+                  - strong [ref=f2e395]: Diego R.
+                  - generic [ref=f2e396]: Electricista instalador · Marzo 2026
+            - blockquote [ref=f2e397]:
+              - paragraph [ref=f2e409]: “Hice preceptora y el trato fue excelente. El curso me abrió la puerta a la escuela.”
+              - generic [ref=f2e410]:
+                - generic [ref=f2e411]: "02"
+                - generic [ref=f2e412]:
+                  - strong [ref=f2e413]: Lucía P.
+                  - generic [ref=f2e414]: Preceptora · Febrero 2026
+            - blockquote [ref=f2e415]:
+              - paragraph [ref=f2e427]: “Las prácticas en salud marcan la diferencia. Entendés el ritmo de una clínica antes de pedir trabajo.”
+              - generic [ref=f2e428]:
+                - generic [ref=f2e429]: "03"
+                - generic [ref=f2e430]:
+                  - strong [ref=f2e431]: Mariana G.
+                  - generic [ref=f2e432]: Auxiliar de farmacia · Noviembre 2025
+            - blockquote [ref=f2e433]:
+              - paragraph [ref=f2e445]: “Horario nocturno y herramientas en serio. En tres meses ya estaba saliendo a domicilios con un colega.”
+              - generic [ref=f2e446]:
+                - generic [ref=f2e447]: "04"
+                - generic [ref=f2e448]:
+                  - strong [ref=f2e449]: Pablo S.
+                  - generic [ref=f2e450]: Refrigeración y aire · Octubre 2025
+            - blockquote [ref=f2e451]:
+              - paragraph [ref=f2e463]: “Aprendí costos, no solo recetas. Hoy vendo por encargo y el certificado me sirvió para el local.”
+              - generic [ref=f2e464]:
+                - generic [ref=f2e465]: "05"
+                - generic [ref=f2e466]:
+                  - strong [ref=f2e467]: Carla M.
+                  - generic [ref=f2e468]: Pastelería para emprendimiento · Agosto 2025
+            - blockquote [ref=f2e469]:
+              - paragraph [ref=f2e481]: "“Iba a un curso más caro en Capital. Acá el docente va al caso: planillas que se usan en una oficina de San Juan.”"
+              - generic [ref=f2e482]:
+                - generic [ref=f2e483]: "06"
+                - generic [ref=f2e484]:
+                  - strong [ref=f2e485]: Hernán V.
+                  - generic [ref=f2e486]: Excel y administración · Julio 2025
+      - generic [ref=f2e487]:
+        - generic [ref=f2e488]:
+          - paragraph [ref=f2e489]: Encontranos
+          - heading "Liceo Profesional Laprida" [level=3] [ref=f2e490]
+          - paragraph [ref=f2e491]: Gral. José María Paz Este 44, San Juan Capital
+          - paragraph [ref=f2e495]: Lunes a viernes de 8:30 a 20:30Sábados de 9:00 a 13:00
+        - iframe [ref=f2e497]
+        - generic "Redes sociales y contacto" [ref=f2e498]:
+          - link "Instagram @liceo_laprida" [ref=f2e499] [cursor=pointer]:
+            - /url: https://www.instagram.com/liceo_laprida/
+            - generic [ref=f2e504]:
+              - strong [ref=f2e505]: Instagram
+              - generic [ref=f2e506]: "@liceo_laprida"
+          - link "Facebook Liceo Laprida" [ref=f2e507] [cursor=pointer]:
+            - /url: https://www.facebook.com/635150843222009
+            - generic [ref=f2e510]:
+              - strong [ref=f2e511]: Facebook
+              - generic [ref=f2e512]: Liceo Laprida
+          - link "WhatsApp Consultas directas" [ref=f2e513] [cursor=pointer]:
+            - /url: https://wa.me/542645808222
+            - generic [ref=f2e516]:
+              - strong [ref=f2e517]: WhatsApp
+              - generic [ref=f2e518]: Consultas directas
+          - link "Gmail Escribinos por correo" [ref=f2e519] [cursor=pointer]:
+            - /url: mailto:instituto.superior.laprida@gmail.com
+            - generic [ref=f2e525]:
+              - strong [ref=f2e526]: Gmail
+              - generic [ref=f2e527]: Escribinos por correo
+    - generic [ref=f2e529]:
+      - generic [ref=f2e530]:
+        - paragraph [ref=f2e534]: Una consulta, dos datos
+        - heading "Escribinos directo por WhatsApp." [level=2] [ref=f2e535]
+        - paragraph [ref=f2e536]: Dejanos tu nombre y tu pregunta. Abrimos el mensaje listo para que lo envíes.
+        - generic [ref=f2e537]:
+          - generic [ref=f2e538]: Gral. José María Paz Este 44
+          - generic [ref=f2e542]: Lun. a vie. de 8:30 a 20:30
+      - generic [ref=f2e546]:
+        - generic [ref=f2e551]:
+          - strong [ref=f2e552]: Liceo Profesional Laprida
+          - generic [ref=f2e553]: En línea para ayudarte
+        - generic [ref=f2e554]:
+          - generic [ref=f2e555]:
+            - paragraph [ref=f2e556]: ¡Hola! Contanos qué curso te interesa o qué necesitás saber.
+            - generic [ref=f2e557]: Respondemos por WhatsApp
+          - generic [ref=f2e558]:
+            - generic [ref=f2e559]:
+              - text: Tu nombre
+              - textbox "Tu nombre" [ref=f2e560]:
+                - /placeholder: "Ej.: Laura Pérez"
+            - generic [ref=f2e561]:
+              - text: ¿Qué querés consultar?
+              - textbox "¿Qué querés consultar?" [ref=f2e562]:
+                - /placeholder: "Ej.: quiero conocer los horarios de Auxiliar de Farmacia…"
+            - button "Enviar por WhatsApp" [ref=f2e563] [cursor=pointer]
+            - paragraph [ref=f2e566]: Sin teléfono, correo ni formularios largos.
+  - contentinfo [ref=f2e567]:
+    - generic [ref=f2e568]:
+      - generic [ref=f2e569]:
+        - img "Liceo Profesional Laprida" [ref=f2e570]
+        - paragraph [ref=f2e571]: Te brindamos las herramientas y el conocimiento para hallar tu mejor trabajo.
+      - navigation "Explorar" [ref=f2e572]:
+        - heading "Explorar" [level=2] [ref=f2e573]
+        - link "Cursos" [ref=f2e574] [cursor=pointer]:
+          - /url: /#catalogo
+        - link "Ofertas" [ref=f2e575] [cursor=pointer]:
+          - /url: /#ofertas
+        - link "La institución" [ref=f2e576] [cursor=pointer]:
+          - /url: /#institucion
+        - link "Experiencias" [ref=f2e577] [cursor=pointer]:
+          - /url: /#alumnos
+        - link "Contacto y sede" [ref=f2e578] [cursor=pointer]:
+          - /url: /#contacto
+        - link "Preinscripción" [ref=f2e579] [cursor=pointer]:
+          - /url: /inscripcion
+      - navigation "Áreas de formación" [ref=f2e580]:
+        - heading "Áreas" [level=2] [ref=f2e581]
+        - link "Gastronomía" [ref=f2e582] [cursor=pointer]:
+          - /url: /?area=gastronomia#catalogo
+        - link "Belleza" [ref=f2e583] [cursor=pointer]:
+          - /url: /?area=belleza#catalogo
+        - link "Técnica" [ref=f2e584] [cursor=pointer]:
+          - /url: /?area=tecnica#catalogo
+        - link "S.L.P." [ref=f2e585] [cursor=pointer]:
+          - /url: /?area=slp#catalogo
+        - link "Administración" [ref=f2e586] [cursor=pointer]:
+          - /url: /?area=administracion#catalogo
+        - link "Ver todas las áreas" [ref=f2e587] [cursor=pointer]:
+          - /url: /#catalogo
+      - generic [ref=f2e588]:
+        - heading "Sede central" [level=2] [ref=f2e589]
+        - paragraph [ref=f2e590]: Gral. José María Paz Este 44J5400 San Juan Capital
+        - link "+54 264 580-8222" [ref=f2e591] [cursor=pointer]:
+          - /url: tel:+542645808222
+        - link "WhatsApp" [ref=f2e592] [cursor=pointer]:
+          - /url: https://wa.me/542645808222
+        - link "@liceo_laprida" [ref=f2e593] [cursor=pointer]:
+          - /url: https://www.instagram.com/liceo_laprida/
+    - generic [ref=f2e594]:
+      - generic [ref=f2e595]: © 2026 Liceo Profesional Laprida
+      - generic [ref=f2e596]: Capacitación laboral con sede en San Juan
+  - link "Escribir por WhatsApp" [ref=f2e597] [cursor=pointer]:
+    - /url: https://wa.me/542645808222
+    - generic [ref=f2e600]: Escribinos
