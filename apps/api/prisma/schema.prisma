@@ -1,0 +1,96 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum CourseFormat {
+  presencial
+  hibrido
+  virtual
+}
+
+enum EnrollmentStatus {
+  nuevo
+  contactado
+  inscripto
+  baja
+}
+
+enum PaymentStatus {
+  pendiente
+  sena
+  aprobado
+}
+
+enum EnrollmentSource {
+  web
+  equipo
+  ejemplo
+}
+
+/// formats, requirements, outcomes and modules are JSON string arrays (MySQL has no array columns); validated with Zod in the API.
+model Course {
+  id             String       @id @db.VarChar(120)
+  title          String       @db.VarChar(200)
+  category       String       @db.VarChar(60)
+  durationMonths Int
+  hours          Int
+  formats        Json
+  ministry       Boolean      @default(false)
+  practices      Boolean      @default(false)
+  seats          Int
+  shift          String       @db.VarChar(60)
+  matricula      Int
+  cuota          Int
+  requirements   Json
+  start          DateTime     @db.Date
+  image          String       @db.VarChar(500)
+  summary        String       @db.Text
+  description    String       @db.Text
+  outcomes       Json
+  modules        Json
+  position       Int          @default(0)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  enrollments    Enrollment[]
+
+  @@index([category])
+}
+
+/// Editable site blocks (hero, story, contact, offers...), one row per block, edited whole from the admin.
+model SiteContent {
+  key       String   @id @db.VarChar(60)
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+model Enrollment {
+  id          String           @id @default(cuid())
+  code        String           @db.VarChar(20)
+  name        String           @db.VarChar(200)
+  dni         String           @db.VarChar(15)
+  email       String           @db.VarChar(254)
+  phone       String           @db.VarChar(40)
+  courseId    String?          @db.VarChar(120)
+  course      Course?          @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  courseTitle String           @db.VarChar(200)
+  modality    CourseFormat
+  shift       String           @db.VarChar(60)
+  status      EnrollmentStatus @default(nuevo)
+  payment     PaymentStatus    @default(pendiente)
+  amount      Int
+  notes       String           @db.Text
+  source      EnrollmentSource @default(web)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([createdAt])
+  @@index([courseId])
+  @@index([dni])
+}
