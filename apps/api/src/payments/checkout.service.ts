@@ -52,14 +52,19 @@ export class CheckoutService {
       },
     });
 
-    const { orderId, checkoutUrl } = await this.gateway.createCheckout({
-      reference: enrollment.id,
-      amount: price.initialPayment,
-      title: `Inscripción · ${course.title}`,
-      itemCode: course.id,
-      payer: { email: input.email, name: input.name, dni: input.dni },
-      returnUrl: `${env.PUBLIC_SITE_URL}/inscripcion/resultado?id=${enrollment.id}`,
-    });
+    const { orderId, checkoutUrl } = await this.gateway
+      .createCheckout({
+        reference: enrollment.id,
+        amount: price.initialPayment,
+        title: `Inscripción · ${course.title}`,
+        itemCode: course.id,
+        payer: { email: input.email, name: input.name, dni: input.dni },
+        returnUrl: `${env.PUBLIC_SITE_URL}/inscripcion/resultado?id=${enrollment.id}`,
+      })
+      .catch(async (error: unknown) => {
+        await this.prisma.enrollment.delete({ where: { id: enrollment.id } });
+        throw error;
+      });
 
     await this.prisma.enrollment.update({
       where: { id: enrollment.id },
@@ -73,7 +78,6 @@ export class CheckoutService {
       where: { id },
       select: {
         name: true,
-        email: true,
         courseTitle: true,
         code: true,
         amount: true,
@@ -83,7 +87,6 @@ export class CheckoutService {
     if (!enrollment) throw new NotFoundException("No encontramos esa inscripción.");
     return {
       firstName: enrollment.name.split(" ")[0],
-      email: enrollment.email,
       course: enrollment.courseTitle,
       code: enrollment.code,
       amount: enrollment.amount,

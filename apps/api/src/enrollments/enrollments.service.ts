@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "../database/prisma.service.js";
 import { type AdminEnrollmentInput, enrollmentCode, toAdminEnrollment } from "./enrollments.js";
 
@@ -16,7 +21,7 @@ export class EnrollmentsService {
     return rows.map(toAdminEnrollment);
   }
 
-  async create(input: AdminEnrollmentInput) {
+  async create({ expectedUpdatedAt: _, ...input }: AdminEnrollmentInput) {
     const courseTitle = await this.courseTitle(input.courseId);
     const row = await this.prisma.enrollment.create({
       data: { ...input, courseTitle, code: enrollmentCode(input.dni), source: "equipo" },
@@ -24,9 +29,14 @@ export class EnrollmentsService {
     return toAdminEnrollment(row);
   }
 
-  async update(id: string, input: AdminEnrollmentInput) {
+  async update(id: string, { expectedUpdatedAt, ...input }: AdminEnrollmentInput) {
     const current = await this.prisma.enrollment.findUnique({ where: { id } });
     if (!current) throw new NotFoundException("No está esa ficha.");
+    if (expectedUpdatedAt && current.updatedAt.toISOString() !== expectedUpdatedAt) {
+      throw new ConflictException(
+        "La ficha cambió mientras la editabas (por ejemplo, se acreditó un pago). Cerrala y volvé a abrirla.",
+      );
+    }
     const courseTitle =
       input.courseId === current.courseId
         ? current.courseTitle

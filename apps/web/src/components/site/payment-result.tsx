@@ -7,7 +7,6 @@ import type { PaymentStatus } from "@/lib/types";
 
 type Status = {
   firstName: string;
-  email: string;
   course: string;
   code: string;
   amount: number;
@@ -160,7 +159,7 @@ export function PaymentResult({ id }: { id: string }) {
           <article>
             <span aria-hidden="true">01</span>
             <strong>Comprobante por email</strong>
-            <p>Lo vas a recibir en {status.email} con el detalle de tu pago.</p>
+            <p>Lo vas a recibir en tu correo con el detalle de tu pago.</p>
           </article>
           <article>
             <span aria-hidden="true">02</span>

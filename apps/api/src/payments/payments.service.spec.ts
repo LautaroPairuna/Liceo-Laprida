@@ -13,7 +13,11 @@ const order: GatewayOrder = {
   paidAmount: 66000,
 };
 
-function setup(enrollment: { id: string; amount: number; payment: string } | null, updated = 1) {
+function setup(
+  enrollment: { id: string; amount: number; payment: string } | null,
+  updated = 1,
+  gatewayOrder: GatewayOrder = order,
+) {
   const prisma = {
     enrollment: {
       findFirst: vi.fn().mockResolvedValue(enrollment),
@@ -22,7 +26,7 @@ function setup(enrollment: { id: string; amount: number; payment: string } | nul
   };
   const gateway = {
     configured: true,
-    getOrder: vi.fn().mockResolvedValue(order),
+    getOrder: vi.fn().mockResolvedValue(gatewayOrder),
     createCheckout: vi.fn(),
   };
   const queue = { add: vi.fn() };
@@ -53,6 +57,22 @@ describe("PaymentsService.applyOrder", () => {
       { enrollmentId: "enr_1" },
       { jobId: "access-enr_1" },
     );
+  });
+
+  it("marks an approved enrollment as rejected when the order is refunded later", async () => {
+    const { service, prisma, queue } = setup(
+      { id: "enr_1", amount: 66000, payment: "aprobado" },
+      1,
+      { ...order, status: "refunded", statusDetail: "refunded" },
+    );
+
+    await service.applyOrder("ORD01");
+
+    expect(prisma.enrollment.updateMany).toHaveBeenCalledWith({
+      where: { id: "enr_1", payment: "aprobado" },
+      data: { payment: "rechazado", mpStatus: "refunded/refunded" },
+    });
+    expect(queue.add).not.toHaveBeenCalled();
   });
 
   it("does nothing when the enrollment was already approved", async () => {

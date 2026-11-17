@@ -26,9 +26,21 @@ export class PaymentsService {
       this.logger.warn(`[pagos] order ${order.id} sin inscripción (ref ${order.reference})`);
       return;
     }
-    if (enrollment.payment === "aprobado") return;
-
     const outcome = orderOutcome(order, enrollment);
+
+    if (enrollment.payment === "aprobado") {
+      if (outcome.payment !== "rechazado") return;
+      this.logger.warn(`[pagos] ${enrollment.id}: pago aprobado revertido (${order.status})`);
+      await this.prisma.enrollment.updateMany({
+        where: { id: enrollment.id, payment: "aprobado" },
+        data: {
+          payment: "rechazado",
+          mpStatus: `${order.status}/${order.statusDetail}`.slice(0, 40),
+        },
+      });
+      return;
+    }
+
     if (outcome.reason) this.logger.warn(`[pagos] ${enrollment.id}: ${outcome.reason}`);
 
     const approved = outcome.payment === "aprobado";

@@ -21,6 +21,15 @@ const schema = z.object({
   BETTER_AUTH_SECRET: z.string().min(32),
   UPLOADS_DIR: z.string().default("./uploads"),
   UPLOAD_MAX_BYTES: z.coerce.number().int().positive().default(5_000_000),
+  TRUSTED_PROXIES: z
+    .string()
+    .default("127.0.0.1,::1,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16")
+    .transform((value) =>
+      value
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
+    ),
   MP_ACCESS_TOKEN: optionalSecret,
   MP_WEBHOOK_SECRET: optionalSecret,
 });

@@ -17,7 +17,7 @@ export function createAuth(prisma: PrismaClient) {
     },
     rateLimit: { enabled: true },
     advanced: {
-      ipAddress: { ipAddressHeaders: ["x-forwarded-for"] },
+      ipAddress: { ipAddressHeaders: ["x-forwarded-for"], trustedProxies: env.TRUSTED_PROXIES },
     },
   });
 }

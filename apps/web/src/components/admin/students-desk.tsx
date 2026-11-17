@@ -46,7 +46,7 @@ type FormProps = {
   initial: Draft;
   record?: Enrollment;
   courses: Course[];
-  onSave: (draft: Draft) => Promise<void>;
+  onSave: (draft: Draft) => Promise<Enrollment>;
   onDelete?: () => void;
   onClose: () => void;
 };
@@ -80,7 +80,8 @@ function StudentForm({ initial, record, courses, onSave, onDelete, onClose }: Fo
     if (!draft.courseId) return setError("Elegí un curso.");
     setSaving(true);
     try {
-      await onSave(draft);
+      const saved = await onSave(draft);
+      setDraft((current) => ({ ...current, expectedUpdatedAt: saved.updatedAt }));
       setError("");
     } catch (saveError) {
       setError((saveError as Error).message);
@@ -296,6 +297,7 @@ function matches(item: Enrollment, filters: Filters) {
 
 const toDraft = (item: Enrollment): Draft => ({
   id: item.id,
+  expectedUpdatedAt: item.updatedAt,
   name: item.name,
   dni: item.dni,
   email: item.email,
@@ -373,10 +375,11 @@ export function StudentsDesk() {
     const saved = await save.mutateAsync({ ...draft, amount: Number(draft.amount) || 0 });
     if (draft.id) {
       setNotice("Ficha guardada.");
-      return;
+      return saved;
     }
     setFilter({ alumno: saved.id });
     setNotice("Ficha cargada.");
+    return saved;
   };
 
   const removeSelected = async () => {

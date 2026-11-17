@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 import { CourseCard } from "@/components/site/course-card";
 import { courseFormats, formatMoney, isFormat, modalityById } from "@/lib/institution";
@@ -9,7 +8,7 @@ import { getCourse } from "@/lib/site";
 export async function generateMetadata({ params }: PageProps<"/cursos/[id]">): Promise<Metadata> {
   const { id } = await params;
   const found = await getCourse(id);
-  if (!found) return { title: "Curso no encontrado | Red Laprida" };
+  if (!found) return { title: "Curso no encontrado | Red Laprida", robots: { index: false } };
   const { course, content } = found;
   return {
     title: `${course.title} | ${content.brand.name}`,
@@ -25,7 +24,16 @@ export default async function CourseDetailPage({
 }: PageProps<"/cursos/[id]">) {
   const [{ id }, { modalidad }] = await Promise.all([params, searchParams]);
   const found = await getCourse(id);
-  if (!found) notFound();
+  if (!found) {
+    return (
+      <main id="main-content" className="page-detail">
+        <p className="empty-state">Ese curso no está en el catálogo.</p>
+        <Link href="/#catalogo" className="btn btn-solid">
+          Volver a cursos
+        </Link>
+      </main>
+    );
+  }
   const { course, content, courses } = found;
 
   const category = content.categories.find((item) => item.id === course.category) ?? {

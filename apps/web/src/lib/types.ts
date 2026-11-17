@@ -160,4 +160,5 @@ export type Enrollment = {
   mpOrderId: string;
   mpStatus: string;
   paidAt: string | null;
+  updatedAt: string;
 };

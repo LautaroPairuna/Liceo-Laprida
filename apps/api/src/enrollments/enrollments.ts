@@ -28,6 +28,7 @@ export const adminEnrollmentSchema = z.object({
     .catch(0)
     .transform((value) => Math.max(0, Math.round(value) || 0)),
   notes: z.string().max(5000).default(""),
+  expectedUpdatedAt: z.iso.datetime().optional(),
 });
 
 export type AdminEnrollmentInput = z.infer<typeof adminEnrollmentSchema>;
@@ -55,5 +56,6 @@ export function toAdminEnrollment(row: Enrollment) {
     mpOrderId: row.mpOrderId ?? "",
     mpStatus: row.mpStatus ?? "",
     paidAt: row.paidAt?.toISOString() ?? null,
+    updatedAt: row.updatedAt.toISOString(),
   };
 }

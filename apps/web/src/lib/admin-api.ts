@@ -44,7 +44,8 @@ export type EnrollmentDraft = Omit<
   | "mpOrderId"
   | "mpStatus"
   | "paidAt"
-> & { id?: string };
+  | "updatedAt"
+> & { id?: string; expectedUpdatedAt?: string };
 
 export const adminApi = {
   site: () => request<Site>("/api/site"),
