@@ -13,7 +13,8 @@
     "build": "npm run build -w api && npm run build -w web",
     "test": "npm test -w api",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "start": "node scripts/start.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8"

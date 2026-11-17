@@ -7,7 +7,7 @@ Sitio de Red Laprida y del Liceo Profesional Laprida (San Juan): catálogo de cu
 | `apps/web` | Next.js 16 (App Router, standalone)                                    | 3000   |
 | `apps/api` | NestJS 12 sobre Fastify, Prisma 7 + MySQL, BullMQ + Redis, Better Auth | 4000   |
 
-La web reescribe `/api/*` hacia la API, así el navegador habla con un solo dominio (cookies de sesión y webhook de Mercado Pago incluidos). La API no necesita dominio público.
+La web reescribe `/api/*` hacia la API, así el navegador habla con un solo dominio (cookies de sesión y webhook de Mercado Pago incluidos). En producción las dos corren en el mismo contenedor y la API no se expone.
 
 ## Desarrollo local
 
@@ -38,37 +38,36 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 Tests: `npm test -w api` (unitarios) y `npm run test:e2e -w api` (necesita Redis).
 
-## Variables por servicio (Dokploy)
+## Deploy en Dokploy
 
-En el VPS no hay `.env`: cada servicio tiene su Environment y recibe solo lo que usa (la web nunca ve los secretos de la base, de la sesión ni de Mercado Pago).
+Un solo servicio con Railpack (`railpack.json` en la raíz). El arranque (`node scripts/start.mjs`) aplica las migraciones y levanta los dos procesos en el mismo contenedor: la API en el puerto 4000 (heap 256 MB) y la web standalone en `PORT` (3000 por defecto, heap 384 MB). Si cualquiera de los dos se cae, el contenedor se baja entero para que Dokploy lo reinicie.
 
-**API** (`RAILPACK_CONFIG_FILE=railpack.api.json`)
+- Railpack 0.39 o superior y `RAILPACK_PRUNE_DEPS=true` (el arranque solo usa `node` y el CLI de Prisma, que está en `dependencies`).
+- Memory Limit: unos 1,3 GB (el doble de la suma de los dos heaps).
+- Puerto del dominio: el de la web (3000). La API no se expone; la web la alcanza por `127.0.0.1:4000`.
+- Bind mount de fotos en `/srv/uploads/liceo-laprida`, con `UPLOADS_DIR` igual al Mount Path.
+- Una sola réplica: las migraciones corren en cada arranque.
 
-| Variable                               | Valor                                                                       |
-| -------------------------------------- | --------------------------------------------------------------------------- |
-| `DATABASE_URL`                         | usuario propio de la base, con permisos solo sobre ella                     |
-| `DATABASE_POOL_MAX`                    | `5` (sumar con las demás apps de la instancia)                              |
-| `REDIS_URL`                            | instancia con `maxmemory-policy noeviction`                                 |
-| `BETTER_AUTH_SECRET`                   | aleatorio, distinto por entorno                                             |
-| `PUBLIC_SITE_URL`                      | `https://dominio-del-sitio`                                                 |
-| `UPLOADS_DIR`                          | igual al Mount Path del bind mount (`/srv/uploads/liceo-laprida` en el VPS) |
-| `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET` | credenciales de producción de Mercado Pago                                  |
-| `NODE_ENV`                             | `production`                                                                |
+En el VPS no hay `.env`: todo va en la pestaña Environment del servicio.
 
-**Web** (`RAILPACK_CONFIG_FILE=railpack.web.json`)
-
-| Variable               | Valor                                                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `API_INTERNAL_URL`     | URL interna de la API en la red de Docker, por ejemplo `http://liceo-laprida-api:4000` (también se usa en el build: el rewrite queda fijo al compilar) |
-| `NEXT_PUBLIC_SITE_URL` | `https://dominio-del-sitio` (se usa en el build: cambiarla exige rebuild)                                                                              |
+| Variable                               | Valor                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------- |
+| `DATABASE_URL`                         | usuario propio de la base, con permisos solo sobre ella                   |
+| `DATABASE_POOL_MAX`                    | `5` (sumar con las demás apps de la instancia)                            |
+| `REDIS_URL`                            | instancia con `maxmemory-policy noeviction`                               |
+| `BETTER_AUTH_SECRET`                   | aleatorio, distinto por entorno                                           |
+| `PUBLIC_SITE_URL`                      | `https://dominio-del-sitio`                                               |
+| `NEXT_PUBLIC_SITE_URL`                 | `https://dominio-del-sitio` (se usa en el build: cambiarla exige rebuild) |
+| `UPLOADS_DIR`                          | igual al Mount Path del bind mount                                        |
+| `MP_ACCESS_TOKEN`, `MP_WEBHOOK_SECRET` | credenciales de producción de Mercado Pago                                |
+| `NODE_ENV`                             | `production`                                                              |
 
 ## Primer deploy
 
 1. Crear la base y el usuario en la instancia MySQL compartida.
-2. Desplegar la API: aplica las migraciones al arrancar (`prisma migrate deploy` en el comando de arranque, una sola réplica).
-3. En la terminal del contenedor de la API: `node apps/api/dist/scripts/seed.js` y `node apps/api/dist/scripts/create-admin.js correo clave Nombre`.
-4. Desplegar la web y apuntar el dominio a ella.
-5. En Mercado Pago, _Tus integraciones → Webhooks_: URL `https://dominio/api/webhooks/mercadopago`, evento **Order (Mercado Pago)**; copiar la clave secreta a `MP_WEBHOOK_SECRET` y probar con "Simular notificación".
+2. Crear el servicio, cargar las variables y el bind mount, y desplegar.
+3. En la terminal del contenedor: `node apps/api/dist/scripts/seed.js` y `node apps/api/dist/scripts/create-admin.js correo clave Nombre`.
+4. En Mercado Pago, _Tus integraciones → Webhooks_: URL `https://dominio/api/webhooks/mercadopago`, evento **Order (Mercado Pago)**; copiar la clave secreta a `MP_WEBHOOK_SECRET` y probar con "Simular notificación".
 
 ## Plataforma educativa
 
