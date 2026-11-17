@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.12.0"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -11,16 +11,19 @@
     "start": "node .next/standalone/apps/web/server.js"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.107.1",
+    "better-auth": "^1.7.25",
+    "leaflet": "^1.9.4",
     "next": "16.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@tailwindcss/turbopack": "4.3.3",
+    "@types/leaflet": "^1.9.22",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "tailwindcss": "4.3.3",
     "typescript": "^5"
   }
 }

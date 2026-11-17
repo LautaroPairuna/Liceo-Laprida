@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "steps": {
+    "build": {
+      "commands": ["npm run build -w api"]
+    }
+  },
+  "deploy": {
+    "startCommand": "cd apps/api && ../../node_modules/.bin/prisma migrate deploy && exec node --max-old-space-size=256 dist/main.js",
+    "variables": { "PORT": "4000", "MALLOC_ARENA_MAX": "2" }
+  }
+}
