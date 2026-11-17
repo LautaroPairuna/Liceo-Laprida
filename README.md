@@ -22,7 +22,7 @@ npm run dev:api                  # http://localhost:4000/api/health
 npm run dev:web                  # http://localhost:3000
 ```
 
-`apps/api/.env`:
+`.env` en la raíz del repo (lo leen las dos apps; un `.env` dentro de `apps/api` o `apps/web` también se carga, pero el de la raíz tiene prioridad):
 
 ```
 DATABASE_URL=mysql://usuario:clave@localhost:3306/laprida
@@ -32,11 +32,15 @@ PUBLIC_SITE_URL=http://localhost:3000
 UPLOADS_DIR=./uploads
 MP_ACCESS_TOKEN=         # credencial de prueba de Mercado Pago
 MP_WEBHOOK_SECRET=       # clave secreta de webhooks de la app de Mercado Pago
+API_INTERNAL_URL=http://localhost:4000
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 Tests: `npm test -w api` (unitarios) y `npm run test:e2e -w api` (necesita Redis).
 
 ## Variables por servicio (Dokploy)
+
+En el VPS no hay `.env`: cada servicio tiene su Environment y recibe solo lo que usa (la web nunca ve los secretos de la base, de la sesión ni de Mercado Pago).
 
 **API** (`RAILPACK_CONFIG_FILE=railpack.api.json`)
 
@@ -53,10 +57,10 @@ Tests: `npm test -w api` (unitarios) y `npm run test:e2e -w api` (necesita Redis
 
 **Web** (`RAILPACK_CONFIG_FILE=railpack.web.json`)
 
-| Variable               | Valor                                                                                  |
-| ---------------------- | -------------------------------------------------------------------------------------- |
-| `API_INTERNAL_URL`     | URL interna de la API en la red de Docker, por ejemplo `http://liceo-laprida-api:4000` |
-| `NEXT_PUBLIC_SITE_URL` | `https://dominio-del-sitio` (se usa en el build: cambiarla exige rebuild)              |
+| Variable               | Valor                                                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `API_INTERNAL_URL`     | URL interna de la API en la red de Docker, por ejemplo `http://liceo-laprida-api:4000` (también se usa en el build: el rewrite queda fijo al compilar) |
+| `NEXT_PUBLIC_SITE_URL` | `https://dominio-del-sitio` (se usa en el build: cambiarla exige rebuild)                                                                              |
 
 ## Primer deploy
 

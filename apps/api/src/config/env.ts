@@ -1,7 +1,10 @@
 import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { z } from "zod";
 
-if (existsSync(".env")) process.loadEnvFile();
+for (const file of [resolve(process.cwd(), "../../.env"), resolve(process.cwd(), ".env")]) {
+  if (existsSync(file)) process.loadEnvFile(file);
+}
 
 const optionalSecret = z
   .string()
