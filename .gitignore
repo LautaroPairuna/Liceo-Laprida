@@ -36,4 +36,4 @@ generated
 # Local agent tooling
 .atl
 legacy
-uploads
+/apps/api/uploads/
