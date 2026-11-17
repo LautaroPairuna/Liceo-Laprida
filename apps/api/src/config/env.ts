@@ -3,11 +3,23 @@ import { z } from "zod";
 
 if (existsSync(".env")) process.loadEnvFile();
 
+const optionalSecret = z
+  .string()
+  .optional()
+  .transform((value) => value || undefined);
+
 const schema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().int().positive().default(4000),
   DATABASE_URL: z.url(),
   DATABASE_POOL_MAX: z.coerce.number().int().positive().default(5),
+  REDIS_URL: z.url().default("redis://localhost:6379"),
+  PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
+  BETTER_AUTH_SECRET: z.string().min(32),
+  UPLOADS_DIR: z.string().default("./uploads"),
+  UPLOAD_MAX_BYTES: z.coerce.number().int().positive().default(5_000_000),
+  MP_ACCESS_TOKEN: optionalSecret,
+  MP_WEBHOOK_SECRET: optionalSecret,
 });
 
 export type Env = z.infer<typeof schema>;

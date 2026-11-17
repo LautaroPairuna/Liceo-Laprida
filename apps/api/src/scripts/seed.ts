@@ -1,21 +1,11 @@
-import "dotenv/config";
-import { readFileSync } from "node:fs";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-import {
-  type SeedData,
-  toCourseRow,
-  toEnrollmentRow,
-  toSiteContentRows,
-} from "../src/database/seed-data.js";
-import { PrismaClient } from "../src/generated/prisma/client.js";
+import { env } from "../config/env.js";
+import { toCourseRow, toEnrollmentRow, toSiteContentRows } from "../database/seed-data.js";
+import { PrismaClient } from "../generated/prisma/client.js";
+import { seedData } from "../site/defaults.js";
 
-const data: SeedData = JSON.parse(
-  readFileSync(new URL("./seed-data.json", import.meta.url), "utf8"),
-);
-
-const prisma = new PrismaClient({
-  adapter: new PrismaMariaDb(process.env.DATABASE_URL ?? ""),
-});
+const data = seedData();
+const prisma = new PrismaClient({ adapter: new PrismaMariaDb(env.DATABASE_URL) });
 
 async function main() {
   const content = await prisma.siteContent.createMany({
@@ -28,7 +18,7 @@ async function main() {
   });
   console.log(`[seed] contenido: ${content.count}, cursos: ${courses.count}`);
 
-  if (process.env.NODE_ENV === "production") return;
+  if (env.NODE_ENV === "production") return;
 
   const titles = new Map(data.courses.map((course) => [course.id, course.title]));
   const enrollments = await prisma.enrollment.createMany({

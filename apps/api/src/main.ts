@@ -1,11 +1,12 @@
 import { NestFactory } from "@nestjs/core";
-import { FastifyAdapter, type NestFastifyApplication } from "@nestjs/platform-fastify";
+import type { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { AppModule } from "./app.module.js";
+import { env } from "./config/env.js";
+import { configureApp, createAdapter } from "./setup.js";
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
-  app.setGlobalPrefix("api");
-  app.enableShutdownHooks();
-  await app.listen(Number(process.env.PORT ?? 4000), "0.0.0.0");
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, createAdapter());
+  configureApp(app);
+  await app.listen(env.PORT, "0.0.0.0");
 }
 await bootstrap();

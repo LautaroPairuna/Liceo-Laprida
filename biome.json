@@ -14,8 +14,8 @@
       "!**/dist",
       "!**/generated",
       "!legacy",
-      "!output",
-      "!.playwright-cli"
+      "!apps/web/public",
+      "!apps/web/src/styles"
     ]
   },
   "formatter": {
@@ -23,11 +23,6 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineWidth": 100
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
-    }
   },
   "javascript": {
     "parser": {
@@ -41,12 +36,30 @@
       "style": {
         "useImportType": "off"
       }
-    },
-    "domains": {
-      "next": "recommended",
-      "react": "recommended"
     }
   },
+  "overrides": [
+    {
+      "includes": ["apps/web/**"],
+      "linter": {
+        "domains": {
+          "next": "recommended",
+          "react": "recommended"
+        },
+        "rules": {
+          "performance": {
+            "noImgElement": "off"
+          },
+          "suspicious": {
+            "noArrayIndexKey": "off"
+          },
+          "a11y": {
+            "useSemanticElements": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {

@@ -26,6 +26,14 @@ enum PaymentStatus {
   pendiente
   sena
   aprobado
+  rechazado
+}
+
+enum AccessStatus {
+  no_solicitado
+  pendiente
+  otorgado
+  fallido
 }
 
 enum EnrollmentSource {
@@ -87,10 +95,76 @@ model Enrollment {
   amount      Int
   notes       String           @db.Text
   source      EnrollmentSource @default(web)
+  mpOrderId   String?          @unique @db.VarChar(64)
+  mpStatus    String?          @db.VarChar(40)
+  paidAt      DateTime?
+  access      AccessStatus     @default(no_solicitado)
+  accessNote  String?          @db.VarChar(500)
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 
   @@index([createdAt])
   @@index([courseId])
   @@index([dni])
+}
+
+model User {
+  id            String    @id @db.VarChar(64)
+  name          String    @db.VarChar(200)
+  email         String    @unique @db.VarChar(254)
+  emailVerified Boolean   @default(false)
+  image         String?   @db.VarChar(500)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @db.VarChar(64)
+  expiresAt DateTime
+  token     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?  @db.VarChar(64)
+  userAgent String?  @db.Text
+  userId    String   @db.VarChar(64)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @db.VarChar(64)
+  accountId             String    @db.VarChar(255)
+  providerId            String    @db.VarChar(64)
+  userId                String    @db.VarChar(64)
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?   @db.Text
+  password              String?   @db.Text
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @db.VarChar(64)
+  identifier String   @db.VarChar(255)
+  value      String   @db.Text
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
