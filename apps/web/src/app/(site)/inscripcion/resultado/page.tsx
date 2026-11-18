@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PaymentResult } from "@/components/site/payment-result";
 
 export const metadata: Metadata = {
-  title: "Estado de tu inscripción | Red Laprida",
+  title: "Estado de tu inscripción | Red Cima",
   robots: { index: false },
 };
 

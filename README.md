@@ -1,6 +1,6 @@
 # Liceo Laprida
 
-Sitio de Red Laprida y del Liceo Profesional Laprida (San Juan): catálogo de cursos, inscripción con pago por Mercado Pago y panel de administración.
+Sitio de Red Cima y del Liceo Profesional Laprida (San Juan): catálogo de cursos, inscripción con pago por Mercado Pago y panel de administración.
 
 | App        | Stack                                                                  | Puerto |
 | ---------- | ---------------------------------------------------------------------- | ------ |

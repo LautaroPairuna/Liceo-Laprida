@@ -155,11 +155,11 @@ export function Overview() {
         <article className="house house-red">
           <header className="house-head">
             <span className="house-sigil" aria-hidden="true">
-              R
+              <img src="/red-cima-mark.svg" alt="" width={192} height={192} />
             </span>
             <div>
               <p className="house-kicker">Formatos digitales</p>
-              <h2>Red Laprida</h2>
+              <h2>Red Cima</h2>
             </div>
           </header>
           <p className="house-sentence">

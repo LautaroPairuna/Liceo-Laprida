@@ -37,7 +37,7 @@
     },
     "story": {
       "title": "Una red para aprender un oficio.",
-      "lead": "Red Laprida reúne la formación presencial, híbrida y virtual. En San Juan, las clases presenciales se dictan en el Liceo Profesional Laprida.",
+      "lead": "Red Cima reúne la formación presencial, híbrida y virtual. En San Juan, las clases presenciales se dictan en el Liceo Profesional Laprida.",
       "milestones": [
         {
           "year": "1948",
@@ -55,13 +55,13 @@
           "year": "Hoy",
           "dateTime": null,
           "title": "La tarea",
-          "text": "En la sede de General Paz Este se sigue enseñando el oficio en la práctica, y Red Laprida suma la cursada híbrida y virtual."
+          "text": "En la sede de General Paz Este se sigue enseñando el oficio en la práctica, y Red Cima suma la cursada híbrida y virtual."
         }
       ],
       "purposeTitle": "Propósito",
-      "purpose": "Educar, para Red Laprida, es hacerse cargo de que cada persona pueda usar lo que aprende. Cada curso existe para salir a trabajar o a emprender: hay programa, docente y acompañamiento, y se enseña la técnica que después hay que hacer.",
+      "purpose": "Educar, para Red Cima, es hacerse cargo de que cada persona pueda usar lo que aprende. Cada curso existe para salir a trabajar o a emprender: hay programa, docente y acompañamiento, y se enseña la técnica que después hay que hacer.",
       "visionTitle": "Visión",
-      "vision": "El Liceo Profesional Laprida permanece en el centro de San Juan, con turnos de mañana, tarde y noche, para empezar o retomar. Red Laprida suma a esa sede la cursada híbrida y virtual, para que el oficio se pueda aprender de más de una manera.",
+      "vision": "El Liceo Profesional Laprida permanece en el centro de San Juan, con turnos de mañana, tarde y noche, para empezar o retomar. Red Cima suma a esa sede la cursada híbrida y virtual, para que el oficio se pueda aprender de más de una manera.",
       "facade": "",
       "facadeAlt": "Fachada del Liceo Profesional Laprida"
     },
@@ -313,7 +313,7 @@
       },
       "hibrido": {
         "title": "Cursos híbridos",
-        "lead": "Se realizan en los formatos digitales de Red Laprida: el material está en el campus y las clases son en vivo.",
+        "lead": "Se realizan en los formatos digitales de Red Cima: el material está en el campus y las clases son en vivo.",
         "detail": "Material de estudio en el campus y clases en vivo por Zoom.",
         "points": [
           "Material de estudio en el campus",
@@ -323,7 +323,7 @@
       },
       "virtual": {
         "title": "Cursos virtuales",
-        "lead": "Se realizan en los formatos digitales de Red Laprida. No hay clases en vivo: avanzás en tu propio tiempo.",
+        "lead": "Se realizan en los formatos digitales de Red Cima. No hay clases en vivo: avanzás en tu propio tiempo.",
         "detail": "Sin clases en vivo. Avanzás en tu propio tiempo.",
         "points": [
           "Material de estudio en el campus",
@@ -333,8 +333,8 @@
       }
     },
     "brand": {
-      "name": "Red Laprida",
-      "short": "RL",
+      "name": "Red Cima",
+      "short": "RC",
       "tagline": "Te brindamos las herramientas y el conocimiento para hallar tu mejor trabajo."
     }
   },
@@ -358,7 +358,7 @@
       "cuota": 46000,
       "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80",
       "summary": "Convivencia, registros y acompañamiento de curso para insertarte en una escuela.",
-      "description": "Uno de los trayectos más consultados de Red Laprida. Rol del preceptor y del auxiliar docente, documentación, mediación cotidiana y el vínculo con equipos directivos y familias.",
+      "description": "Uno de los trayectos más consultados de Red Cima. Rol del preceptor y del auxiliar docente, documentación, mediación cotidiana y el vínculo con equipos directivos y familias.",
       "outcomes": [
         "Comprendés el rol y el marco de convivencia",
         "Llevás registros y pases de un curso",

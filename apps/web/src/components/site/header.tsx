@@ -69,7 +69,7 @@ export function Header({ whatsapp }: { whatsapp: string }) {
   return (
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="header-inner">
-        <Link href="/" className="brand" aria-label="Red Laprida, inicio">
+        <Link href="/" className="brand" aria-label="Red Cima, inicio">
           <BrandMark />
         </Link>
 

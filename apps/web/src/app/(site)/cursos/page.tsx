@@ -21,13 +21,13 @@ const METADATA: Record<Format, Metadata> = {
     description: "Cursos presenciales en el Liceo Profesional Laprida, en San Juan Capital.",
   },
   hibrido: {
-    title: "Cursos híbridos | Red Laprida",
+    title: "Cursos híbridos | Red Cima",
     description:
-      "Cursos híbridos en los formatos digitales de Red Laprida: material en el campus y clases en vivo.",
+      "Cursos híbridos en los formatos digitales de Red Cima: material en el campus y clases en vivo.",
   },
   virtual: {
-    title: "Cursos virtuales | Red Laprida",
-    description: "Cursos virtuales en los formatos digitales de Red Laprida, a tu propio tiempo.",
+    title: "Cursos virtuales | Red Cima",
+    description: "Cursos virtuales en los formatos digitales de Red Cima, a tu propio tiempo.",
   },
 };
 
@@ -138,11 +138,11 @@ function CatalogBanner({ modality, content }: { modality: Format; content: SiteC
         {digital ? (
           <span className="format-lockup catalog-lockup">
             <span className="format-sigil" aria-hidden="true">
-              R
+              <img src="/red-cima-mark.svg" alt="" width={192} height={192} />
             </span>
             <span className="format-word">
               <span className="format-red">RED</span>
-              <span className="format-name">LAPRIDA</span>
+              <span className="format-name">CIMA</span>
             </span>
           </span>
         ) : (

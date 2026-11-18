@@ -161,7 +161,7 @@ export function CheckoutForm({ courses, content }: Props) {
               {formats.map((id) => (
                 <option key={id} value={id}>
                   {modalityById.get(id)?.label} ·{" "}
-                  {id === "presencial" ? "Liceo Laprida" : "Red Laprida"}
+                  {id === "presencial" ? "Liceo Laprida" : "Red Cima"}
                 </option>
               ))}
             </select>

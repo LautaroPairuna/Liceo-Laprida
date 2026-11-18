@@ -638,7 +638,7 @@ function CategoriesFields({ draft, onChange }: FieldsProps<"categories">) {
     <div className="fields">
       <p className="span page-lead">
         El nombre y las modalidades se ven en el catálogo. Presencial pertenece al Liceo. Híbrido y
-        virtual, a Red Laprida.
+        virtual, a Red Cima.
       </p>
       {draft.map((category, index) => (
         <div className="repeat-block span" key={category.id}>
@@ -691,8 +691,8 @@ function CatalogCopyFields({ draft, onChange }: FieldsProps<"catalogCopy">) {
             {id === "presencial"
               ? "Liceo Laprida · presencial"
               : id === "hibrido"
-                ? "Red Laprida · híbrido"
-                : "Red Laprida · virtual"}
+                ? "Red Cima · híbrido"
+                : "Red Cima · virtual"}
           </h3>
           <div className="fields">
             <Field className="span" label="Título">

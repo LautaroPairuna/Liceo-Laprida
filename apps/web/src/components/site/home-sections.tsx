@@ -54,11 +54,11 @@ export function CatalogSection({ content, courses }: { content: SiteContent; cou
                 ) : (
                   <span className="format-lockup">
                     <span className="format-sigil" aria-hidden="true">
-                      R
+                      <img src="/red-cima-mark.svg" alt="" width={192} height={192} />
                     </span>
                     <span className="format-word">
                       <span className="format-red">RED</span>
-                      <span className="format-name">LAPRIDA</span>
+                      <span className="format-name">CIMA</span>
                     </span>
                   </span>
                 )}
@@ -68,7 +68,7 @@ export function CatalogSection({ content, courses }: { content: SiteContent; cou
                   <span className="format-net">
                     {item.id === "presencial"
                       ? `${contact.address}, ${contact.locality}`
-                      : "Formatos digitales de Red Laprida"}
+                      : "Formatos digitales de Red Cima"}
                   </span>
                 </span>
                 <span className="format-foot">
@@ -463,12 +463,12 @@ export function ContactSection({ content }: { content: SiteContent }) {
         <article className="contact-red" aria-labelledby="contacto-red">
           <div className="contact-red-lockup">
             <span className="contact-red-sigil" aria-hidden="true">
-              R
+              <img src="/red-cima-mark.svg" alt="" width={192} height={192} />
             </span>
             <h2 id="contacto-red">
               <span className="contact-red-word">
                 <span>RED</span>
-                Laprida
+                Cima
               </span>
             </h2>
           </div>

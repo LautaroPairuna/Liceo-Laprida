@@ -3,7 +3,7 @@ import { CheckoutForm } from "@/components/site/checkout-form";
 import { getSite } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Inscripción | Red Laprida",
+  title: "Inscripción | Red Cima",
   description: "Completá tu inscripción y coordiná cupo, turno y forma de pago.",
   robots: { index: false },
 };

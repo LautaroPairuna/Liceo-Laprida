@@ -17,11 +17,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Red Laprida | Cursos y oficios en San Juan",
+  title: "Red Cima | Cursos y oficios en San Juan",
   description:
-    "Red Laprida. Formación práctica y cursos con salida laboral. Presencial en el Liceo Laprida, San Juan, y también híbrido y virtual.",
+    "Red Cima. Formación práctica y cursos con salida laboral. Presencial en el Liceo Laprida, San Juan, y también híbrido y virtual.",
   icons: { icon: "/favicon.svg" },
-  openGraph: { locale: "es_AR", type: "website", siteName: "Red Laprida" },
+  openGraph: { locale: "es_AR", type: "website", siteName: "Red Cima" },
 };
 
 export const viewport: Viewport = { themeColor: "#f7fafc" };

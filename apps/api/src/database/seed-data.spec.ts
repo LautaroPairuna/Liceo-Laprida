@@ -108,11 +108,11 @@ describe("toEnrollmentRow", () => {
 
 describe("toSiteContentRows", () => {
   it("stores one row per content block", () => {
-    const rows = toSiteContentRows({ hero: { title: "Hola" }, brand: { name: "Red Laprida" } });
+    const rows = toSiteContentRows({ hero: { title: "Hola" }, brand: { name: "Red Cima" } });
 
     expect(rows).toEqual([
       { key: "hero", value: { title: "Hola" } },
-      { key: "brand", value: { name: "Red Laprida" } },
+      { key: "brand", value: { name: "Red Cima" } },
     ]);
   });
 });

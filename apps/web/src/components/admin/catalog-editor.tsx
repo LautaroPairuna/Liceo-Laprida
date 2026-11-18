@@ -12,8 +12,8 @@ import { LoadState, SITE_KEY, useSiteData } from "./use-admin-data";
 const SHIFTS = ["Mañana", "Tarde", "Noche", "Tarde y noche", "A confirmar", "A tu ritmo"];
 const FORMATS: { id: Format; label: string }[] = [
   { id: "presencial", label: "Presencial, en el Liceo" },
-  { id: "hibrido", label: "Híbrido, Red Laprida" },
-  { id: "virtual", label: "Virtual, Red Laprida" },
+  { id: "hibrido", label: "Híbrido, Red Cima" },
+  { id: "virtual", label: "Virtual, Red Cima" },
 ];
 
 type Draft = Omit<CourseDraft, "durationMonths" | "hours" | "seats" | "matricula" | "cuota"> & {
@@ -368,8 +368,8 @@ export function CatalogEditor() {
     <>
       <h1>Catálogo</h1>
       <p className="page-lead">
-        Los cursos presenciales son del Liceo Laprida. Híbrido y virtual son de Red Laprida. Un
-        curso puede estar en más de un formato.
+        Los cursos presenciales son del Liceo Laprida. Híbrido y virtual son de Red Cima. Un curso
+        puede estar en más de un formato.
       </p>
       {notice ? (
         <p className="notice" role="status">

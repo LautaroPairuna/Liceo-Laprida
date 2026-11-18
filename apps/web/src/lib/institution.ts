@@ -140,7 +140,7 @@ export function weekSchedule(hours: Hours[]) {
 }
 
 export function houseName(modality: Format) {
-  return modality === "presencial" ? "Liceo Laprida" : "Red Laprida";
+  return modality === "presencial" ? "Liceo Laprida" : "Red Cima";
 }
 
 export type Place = Contact;

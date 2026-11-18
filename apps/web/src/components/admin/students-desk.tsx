@@ -174,8 +174,8 @@ function StudentForm({ initial, record, courses, onSave, onDelete, onClose }: Fo
             onChange={(event) => set("modality", event.target.value as Format)}
           >
             <option value="presencial">Presencial · Liceo Laprida</option>
-            <option value="hibrido">Híbrido · Red Laprida</option>
-            <option value="virtual">Virtual · Red Laprida</option>
+            <option value="hibrido">Híbrido · Red Cima</option>
+            <option value="virtual">Virtual · Red Cima</option>
           </select>
         </label>
         {mismatch ? <p className="field-error">Ese curso no se ofrece en esa modalidad.</p> : null}

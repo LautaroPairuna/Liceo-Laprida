@@ -8,7 +8,7 @@ import { getCourse } from "@/lib/site";
 export async function generateMetadata({ params }: PageProps<"/cursos/[id]">): Promise<Metadata> {
   const { id } = await params;
   const found = await getCourse(id);
-  if (!found) return { title: "Curso no encontrado | Red Laprida", robots: { index: false } };
+  if (!found) return { title: "Curso no encontrado | Red Cima", robots: { index: false } };
   const { course, content } = found;
   return {
     title: `${course.title} | ${content.brand.name}`,
