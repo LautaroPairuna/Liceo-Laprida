@@ -2184,7 +2184,7 @@ p {
 .contact-whatsapp:hover {
   background: #061f3b;
 }
-.contact-mail {
+.contact-actions .contact-mail {
   background: #e3f6ff;
   color: #082f5b;
 }
@@ -2200,7 +2200,7 @@ p {
 .contact-instagram:hover {
   background: #083e74;
 }
-.contact-facebook {
+.contact-actions .contact-facebook {
   background: #2ec6f5;
   color: #082f5b;
 }
