@@ -347,9 +347,6 @@ p {
 .brand-lockup-footer .brand-sigil {
   width: 48px;
   height: 48px;
-  background: var(--maize);
-  color: var(--navy);
-  font-size: 1.55rem;
 }
 .brand-lockup-footer .brand-red {
   color: var(--maize);
