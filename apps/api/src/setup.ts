@@ -8,7 +8,7 @@ import { env } from "./config/env.js";
 import { registerUploadPrecheck } from "./uploads/upload-precheck.js";
 
 export function createAdapter() {
-  return new FastifyAdapter({ trustProxy: true, bodyLimit: 1_000_000 });
+  return new FastifyAdapter({ trustProxy: env.TRUSTED_PROXIES, bodyLimit: 1_000_000 });
 }
 
 function checkUploadsDir(logger: Logger) {
