@@ -1,30 +1,47 @@
 .admin-lock {
-  position: fixed;
-  inset: 0;
-  z-index: 180;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: 24px;
-  background: rgba(6, 31, 59, 0.62);
+  padding: 24px 16px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.08), transparent 45%),
+    var(--navy);
 }
 
 .admin-lock-card {
-  width: min(100%, 380px);
+  width: min(100%, 400px);
   display: grid;
-  gap: 14px;
-  padding: 22px 22px 18px;
-  border-top: 4px solid var(--navy);
+  gap: 16px;
+  padding: 28px 24px 24px;
+  border-top: 4px solid var(--maize);
+  border-radius: 12px;
   background: white;
   box-shadow: var(--shadow-lg);
+  font-size: 1rem;
+  line-height: 1.45;
 }
 
-.admin-lock-card h2 {
-  margin: 0;
+.admin-lock-head {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.admin-lock-head h1 {
+  margin: 14px 0 0;
   color: var(--navy);
+  font-family: var(--display);
   font-size: 1.7rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
+}
+
+.admin-lock-head p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .admin-lock-card label {
@@ -41,7 +58,13 @@
   border-radius: 8px;
   background: var(--paper);
   color: var(--ink);
+  font: inherit;
   font-weight: 500;
+}
+
+.admin-lock-card input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
 }
 
 .admin-lock-card input[aria-invalid="true"] {
@@ -49,7 +72,7 @@
 }
 
 .admin-lock-error {
-  margin-top: -6px;
+  margin: -6px 0 0;
   color: var(--enroll-dark);
   font-weight: 700;
 }
@@ -57,8 +80,13 @@
 .admin-lock-actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 14px;
   margin-top: 4px;
+}
+
+.admin-lock-actions .btn {
+  flex: 1;
 }
 
 .admin-lock-cancel {

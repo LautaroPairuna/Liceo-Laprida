@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type FormEvent, useId, useState } from "react";
 import { authClient } from "@/lib/admin-api";
+import { BrandMark } from "../brand-mark";
 
 export function LoginForm() {
   const titleId = useId();
@@ -36,7 +37,11 @@ export function LoginForm() {
   return (
     <div className="admin-lock">
       <form className="admin-lock-card" aria-labelledby={titleId} onSubmit={submit}>
-        <h1 id={titleId}>Administración</h1>
+        <div className="admin-lock-head">
+          <BrandMark />
+          <h1 id={titleId}>Administración</h1>
+          <p>Ingresá con tu cuenta para gestionar el sitio.</p>
+        </div>
         <label>
           Correo
           <input type="email" name="email" autoComplete="username" required />

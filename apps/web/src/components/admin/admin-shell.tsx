@@ -53,15 +53,22 @@ export function AdminShell({ userName, children }: { userName: string; children:
               );
             })}
           </nav>
-          <p className="rail-foot">
-            <Link href="/">Ver la web</Link>
-          </p>
-          <p className="rail-foot">
-            {userName} ·{" "}
-            <button type="button" className="linkish" onClick={signOut}>
-              Salir
-            </button>
-          </p>
+          <div className="rail-foot">
+            <Link className="rail-site" href="/">
+              Ver la web <span aria-hidden="true">↗</span>
+            </Link>
+            <div className="rail-user">
+              <span className="rail-avatar" aria-hidden="true">
+                {userName.trim().charAt(0).toUpperCase() || "?"}
+              </span>
+              <span className="rail-user-name" title={userName}>
+                {userName}
+              </span>
+              <button type="button" className="rail-signout" onClick={signOut}>
+                Salir
+              </button>
+            </div>
+          </div>
         </aside>
         <main id="admin-content" className="admin-main">
           {children}

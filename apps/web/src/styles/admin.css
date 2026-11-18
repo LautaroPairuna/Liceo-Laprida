@@ -75,15 +75,66 @@
   box-shadow: inset 3px 0 0 var(--maize);
 }
 .rail-foot {
+  display: grid;
+  gap: 12px;
   margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
-.rail-foot a {
+.rail-site {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
   color: var(--maize);
   font-weight: 700;
 }
-.rail-foot a:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.rail-site:hover {
+  border-color: var(--maize);
+  background: rgba(255, 255, 255, 0.06);
+}
+.rail-user {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+.rail-avatar {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-weight: 700;
+  line-height: 1;
+}
+.rail-user-name {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rail-signout {
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.rail-signout:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+.rail-site:focus-visible,
+.rail-signout:focus-visible {
+  outline: 2px solid var(--maize);
+  outline-offset: 2px;
 }
 
 .admin-main {
@@ -724,7 +775,23 @@
     box-shadow: inset 0 -3px 0 var(--maize);
   }
   .rail-foot {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .rail-site {
+    padding: 6px 10px;
+  }
+  .rail-user {
+    gap: 6px;
+  }
+  .rail-user-name {
+    display: none;
   }
   .admin-main {
     padding: 20px 16px 56px;
