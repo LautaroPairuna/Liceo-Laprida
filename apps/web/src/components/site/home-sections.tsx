@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
+  accentStyle,
   courseFormats,
   formatMoney,
-  inkOn,
   modalities,
   modalityById,
   weekSchedule,
@@ -21,6 +21,7 @@ import {
   IconWhatsApp,
 } from "../icons";
 import { LiceoMapLoader } from "./liceo-map-loader";
+import { MarqueePause } from "./marquee-pause";
 
 export function CatalogSection({ content, courses }: { content: SiteContent; courses: Course[] }) {
   const counts = new Map(modalities.map((item) => [item.id, 0]));
@@ -116,9 +117,7 @@ function OfferCard({ offer, category }: { offer: OfferItem; category?: Category 
     offer.kind === "benefit"
       ? "/inscripcion?promo=grupo3"
       : `/inscripcion?curso=${offer.id}&oferta=1`;
-  const style = category
-    ? ({ "--accent": category.color, "--ink": inkOn(category.color) } as CSSProperties)
-    : undefined;
+  const style = category ? (accentStyle(category.color) as CSSProperties) : undefined;
 
   return (
     <article className={`offer-card offer-card-${offer.kind}`} style={style}>
@@ -197,7 +196,7 @@ export function OffersSection({ content, courses }: { content: SiteContent; cour
           <h2>{content.offers.title}</h2>
         </header>
 
-        <div className="offer-marquee">
+        <div className="offer-marquee" id="ofertas-carrusel">
           <section
             className="offer-track"
             aria-roledescription="carrusel"
@@ -219,6 +218,7 @@ export function OffersSection({ content, courses }: { content: SiteContent; cour
             </div>
           </section>
         </div>
+        <MarqueePause target="ofertas-carrusel" label="el carrusel de ofertas" />
       </div>
     </section>
   );
@@ -269,9 +269,10 @@ export function StudentsSection({ reviews }: { reviews: SiteContent["reviews"] }
             <Stars value={reviews.average} className="stars review-score-stars" />
             <p className="review-score-meta">de 5 · {reviews.count} opiniones</p>
           </div>
+          <MarqueePause target="resenas-carrusel" label="el carrusel de reseñas" />
         </header>
 
-        <div className="review-marquee">
+        <div className="review-marquee" id="resenas-carrusel">
           <div className="review-track">
             <div className="review-group">
               {reviews.items.map((item, index) => (

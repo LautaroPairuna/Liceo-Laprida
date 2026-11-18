@@ -4,8 +4,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type CSSProperties, useDeferredValue } from "react";
 import {
   accentFor,
+  accentStyle,
   courseFormats,
-  inkOn,
   intakes,
   modalities,
   modalityById,
@@ -99,7 +99,7 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
               aria-pressed={area === category.id}
               key={category.id}
               className={area === category.id ? "is-active" : ""}
-              style={{ "--accent": color, "--ink": inkOn(color) } as CSSProperties}
+              style={accentStyle(color) as CSSProperties}
               onClick={() => updateParams({ area: area === category.id ? "all" : category.id })}
             >
               {category.name}
@@ -193,6 +193,7 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
         </form>
 
         <div className="catalog-board">
+          <h2 className="visually-hidden">Cursos disponibles</h2>
           <p className="catalog-count">{countLabel}</p>
           <div className="catalog-results" key={motionKey}>
             {filtered.length === 0 ? (

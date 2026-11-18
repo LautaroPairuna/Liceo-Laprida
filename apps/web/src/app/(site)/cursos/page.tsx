@@ -158,13 +158,13 @@ function CatalogBanner({ modality, content }: { modality: Format; content: SiteC
           <p>{copy.lead}</p>
         </div>
         {digital ? (
-          <aside className="catalog-banner-aside" aria-label="Cómo se cursa">
+          <section className="catalog-banner-aside" aria-label="Cómo se cursa">
             <ul className="catalog-banner-points">
               {(copy.points ?? []).filter(Boolean).map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-          </aside>
+          </section>
         ) : (
           <PresencialFacts content={content} />
         )}

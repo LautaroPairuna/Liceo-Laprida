@@ -35,7 +35,7 @@ export function LoginForm() {
   }
 
   return (
-    <div className="admin-lock">
+    <main className="admin-lock">
       <form className="admin-lock-card" aria-labelledby={titleId} onSubmit={submit}>
         <div className="admin-lock-head">
           <BrandMark />
@@ -70,6 +70,6 @@ export function LoginForm() {
           </Link>
         </div>
       </form>
-    </div>
+    </main>
   );
 }

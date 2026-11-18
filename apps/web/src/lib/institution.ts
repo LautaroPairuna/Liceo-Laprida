@@ -74,14 +74,52 @@ function linearChannel(value: number) {
   return channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
 }
 
+const DARK_INK = "#082f5b";
+const DARK_INK_LUMINANCE = 0.0262;
+const MIN_TEXT_CONTRAST = 4.5;
+
+function parseHex(hex: string | undefined) {
+  const short = hex?.match(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i);
+  const full = short
+    ? `#${short
+        .slice(1)
+        .map((digit) => digit + digit)
+        .join("")}`
+    : hex;
+  if (!full || !/^#[0-9a-f]{6}$/i.test(full)) return null;
+  return [1, 3, 5].map((start) => Number.parseInt(full.slice(start, start + 2), 16));
+}
+
+function luminanceOf([r, g, b]: number[]) {
+  return 0.2126 * linearChannel(r) + 0.7152 * linearChannel(g) + 0.0722 * linearChannel(b);
+}
+
+function bestInk(rgb: number[]) {
+  const luminance = luminanceOf(rgb);
+  const onWhite = 1.05 / (luminance + 0.05);
+  const onDark = (luminance + 0.05) / (DARK_INK_LUMINANCE + 0.05);
+  return onWhite >= onDark
+    ? { ink: "#ffffff", contrast: onWhite }
+    : { ink: DARK_INK, contrast: onDark };
+}
+
 export function inkOn(hex: string | undefined) {
-  if (!hex || hex[0] !== "#") return "#ffffff";
-  const raw = hex.slice(1);
-  const luminance =
-    0.2126 * linearChannel(Number.parseInt(raw.slice(0, 2), 16)) +
-    0.7152 * linearChannel(Number.parseInt(raw.slice(2, 4), 16)) +
-    0.0722 * linearChannel(Number.parseInt(raw.slice(4, 6), 16));
-  return 1.05 / (luminance + 0.05) >= 3.1 ? "#ffffff" : "#082f5b";
+  const rgb = parseHex(hex);
+  return rgb ? bestInk(rgb).ink : "#ffffff";
+}
+
+// Category colours come from the admin, so they can be too light or mid-tone for small text.
+// Darken just enough for one of the two inks to reach WCAG AA.
+export function accentStyle(hex: string | undefined) {
+  let rgb = parseHex(hex);
+  if (!rgb) return { "--accent": hex, "--ink": "#ffffff" };
+  let best = bestInk(rgb);
+  for (let step = 0; step < 20 && best.contrast < MIN_TEXT_CONTRAST; step++) {
+    rgb = rgb.map((channel) => Math.round(channel * 0.94));
+    best = bestInk(rgb);
+  }
+  const accent = `#${rgb.map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
+  return { "--accent": accent, "--ink": best.ink };
 }
 
 const intakeFormat = new Intl.DateTimeFormat("es-AR", {

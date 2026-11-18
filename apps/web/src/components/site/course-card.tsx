@@ -1,15 +1,14 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { courseFormats, formatMoney, inkOn, modalityById } from "@/lib/institution";
+import { accentStyle, courseFormats, formatMoney, modalityById } from "@/lib/institution";
 import type { Category, Course } from "@/lib/types";
 
 export function CourseCard({ course, category }: { course: Course; category?: Category }) {
   const formats = courseFormats(course);
   const presencialOnly = formats.length === 1 && formats[0] === "presencial";
   const style = {
-    "--accent": category?.color,
+    ...accentStyle(category?.color),
     "--soft": category?.soft,
-    "--ink": inkOn(category?.color),
   } as CSSProperties;
 
   return (

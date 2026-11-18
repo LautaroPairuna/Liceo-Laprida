@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { IconArrow } from "@/components/icons";
 import { AmbientVideo } from "@/components/site/ambient-video";
@@ -13,6 +14,8 @@ import { getSite } from "@/lib/site";
 
 const CATALOG_KEYS = ["modalidad", "area", "q", "duracion", "inicio"];
 
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
 export default async function HomePage({ searchParams }: PageProps<"/">) {
   const [query, { content, courses }] = await Promise.all([searchParams, getSite()]);
   if (CATALOG_KEYS.some((key) => typeof query[key] === "string")) {
@@ -27,10 +30,37 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
     }
     redirect(`/cursos?${next.toString()}`);
   }
-  const { hero, learning } = content;
+  const { hero, learning, contact } = content;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: content.brand.name,
+    url: siteUrl,
+    logo: `${siteUrl}/red-cima-logo.svg`,
+    email: contact.email,
+    telephone: `+${contact.phoneRaw}`,
+    sameAs: [contact.instagram, contact.facebook].filter(Boolean),
+    subOrganization: {
+      "@type": "EducationalOrganization",
+      name: contact.legalName,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: contact.address,
+        postalCode: contact.postal,
+        addressLocality: contact.locality,
+        addressCountry: "AR",
+      },
+    },
+  };
 
   return (
     <main id="main-content" className="page-home">
+      <script
+        type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD needs a raw script body; "<" is escaped
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <section id="inicio" className="hero snap-section" data-theme="dark">
         <div className="hero-video" aria-hidden="true">
           {hero.video ? (

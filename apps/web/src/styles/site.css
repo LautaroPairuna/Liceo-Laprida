@@ -1,7 +1,7 @@
 :root {
   --navy: #082f5b;
   --navy-2: #0a4f92;
-  --blue: #0c74d4;
+  --blue: #0a6bc4;
   --sky: #2ec6f5;
   --sky-soft: #e3f6ff;
   --maize: #2fbf7a;
@@ -102,6 +102,18 @@ ol {
 }
 .skip-link:focus {
   transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 h1,
@@ -1121,7 +1133,7 @@ p {
 .catalog-theme-presencial {
   --navy: #082f5b;
   --navy-2: #0a4f92;
-  --blue: #0c74d4;
+  --blue: #0a6bc4;
   --sky: #2ec6f5;
   --sky-soft: #e3f6ff;
   --paper: #f3f9fc;
@@ -1318,7 +1330,7 @@ p {
   overflow-wrap: anywhere;
 }
 .catalog-fact a:hover {
-  color: #0c74d4;
+  color: #0a6bc4;
 }
 .catalog-fact-map {
   justify-self: start;
@@ -2305,11 +2317,11 @@ p {
 }
 .btn-whatsapp {
   background: #25d366;
-  color: white;
+  color: #082f5b;
 }
 .btn-whatsapp:hover {
   background: #1ebe5a;
-  color: white;
+  color: #082f5b;
 }
 .btn-whatsapp svg {
   width: 20px;
@@ -2664,7 +2676,7 @@ p {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #00a8e8;
+  background: #0074ba;
   color: white;
   font-weight: 900;
   text-transform: uppercase;
@@ -2678,7 +2690,7 @@ p {
   width: 27px;
   height: 27px;
   background: white;
-  color: #008fca;
+  color: #0074ba;
   font-size: 0.58rem;
 }
 .mercadopago-choice > span:nth-child(2) {
@@ -2700,22 +2712,22 @@ p {
 }
 .btn-mercadopago {
   min-height: 54px;
-  background: #009ee3;
+  background: #0074ba;
   color: white;
   box-shadow:
-    0 8px 0 #007eb6,
+    0 8px 0 #005a91,
     0 15px 28px rgba(0, 158, 227, 0.22);
 }
 .btn-mercadopago:hover {
   transform: translateY(-3px);
-  background: #00aaf0;
+  background: #0077c2;
   box-shadow:
-    0 10px 0 #007eb6,
+    0 10px 0 #005a91,
     0 19px 34px rgba(0, 158, 227, 0.28);
 }
 .btn-mercadopago:active {
   transform: translateY(3px);
-  box-shadow: 0 3px 0 #007eb6;
+  box-shadow: 0 3px 0 #005a91;
 }
 .checkout-summary {
   position: sticky;
@@ -3743,4 +3755,50 @@ p {
   width: 88%;
   height: 88%;
   object-fit: contain;
+}
+
+/* Pause control for the auto-scrolling carousels (WCAG 2.2.2) */
+.marquee-toggle {
+  justify-self: center;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.marquee-toggle:hover {
+  background: rgba(0, 0, 0, 0.45);
+}
+.marquee-toggle:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+[data-paused] .offer-track,
+[data-paused] .review-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-toggle {
+    display: none;
+  }
+}
+
+.page-not-found {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  padding-block: calc(var(--header) + 48px) 96px;
+  padding-inline: max(16px, calc((100% - 1180px) / 2));
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }

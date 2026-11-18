@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { formatIntakeDate, formatMoney, inkOn } from "@/lib/institution";
+import { accentStyle, formatIntakeDate, formatMoney } from "@/lib/institution";
 import type { Category, Course, Format } from "@/lib/types";
 
 function rhythmFor(modalityId: Format, course: Course) {
@@ -22,10 +22,7 @@ export function CatalogRow({ course, category, modalityId, modalityLabel, accent
   const enrollHref = `/inscripcion?curso=${course.id}&modalidad=${modalityId}`;
 
   return (
-    <article
-      className="catalog-card"
-      style={{ "--accent": accent, "--ink": inkOn(accent) } as CSSProperties}
-    >
+    <article className="catalog-card" style={accentStyle(accent) as CSSProperties}>
       <div className="catalog-card-tags">
         <span className="catalog-card-tag">{category?.name}</span>
         {course.ministry ? <span className="catalog-card-note">Ministerio</span> : null}

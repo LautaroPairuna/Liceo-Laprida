@@ -30,7 +30,15 @@ export const metadata: Metadata = {
     apple: { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
   },
   manifest: "/site.webmanifest",
-  openGraph: { locale: "es_AR", type: "website", siteName: "Red Cima" },
+  openGraph: {
+    locale: "es_AR",
+    type: "website",
+    siteName: "Red Cima",
+    images: [
+      { url: "/og-red-cima.png", width: 1200, height: 630, alt: "Red Cima. El que sabe sube" },
+    ],
+  },
+  twitter: { card: "summary_large_image", images: ["/og-red-cima.png"] },
 };
 
 export const viewport: Viewport = { themeColor: "#f7fafc" };
