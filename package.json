@@ -8,6 +8,7 @@
     "node": "24.x"
   },
   "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
     "dev:web": "npm run dev -w web",
     "dev:api": "npm run start:dev -w api",
     "build": "npm run build -w api && npm run build -w web",
@@ -17,6 +18,7 @@
     "start": "node scripts/start.mjs"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.6.8"
+    "@biomejs/biome": "2.6.8",
+    "concurrently": "^9.2.5"
   }
 }

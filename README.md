@@ -18,8 +18,8 @@ npm install
 npm run db:migrate -w api        # aplica las migraciones
 npm run db:seed -w api           # carga contenido, cursos y fichas de ejemplo
 npm run admin:create -w api -- correo@dominio una-clave-larga "Nombre"
-npm run dev:api                  # http://localhost:4000/api/health
-npm run dev:web                  # http://localhost:3000
+npm run dev                      # API (:4000/api/health) y web (:3000) juntos
+# o por separado: npm run dev:api / npm run dev:web
 ```
 
 `.env` en la raíz del repo (lo leen las dos apps; un `.env` dentro de `apps/api` o `apps/web` también se carga, pero el de la raíz tiene prioridad):
