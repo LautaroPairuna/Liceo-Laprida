@@ -11,6 +11,7 @@ import {
 } from "@/components/site/home-sections";
 import { isFormat } from "@/lib/institution";
 import { getSite } from "@/lib/site";
+import { siteUrl } from "@/lib/site-url";
 
 const CATALOG_KEYS = ["modalidad", "area", "q", "duracion", "inicio"];
 
@@ -31,7 +32,6 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
     redirect(`/cursos?${next.toString()}`);
   }
   const { hero, learning, contact } = content;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
