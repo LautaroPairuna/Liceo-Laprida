@@ -5,11 +5,38 @@
       "commands": [
         "...",
         "cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/static",
-        "cp -r apps/web/public apps/web/.next/standalone/apps/web/public"
+        "cp -r apps/web/public apps/web/.next/standalone/apps/web/public",
+        "env -u NPM_CONFIG_PRODUCTION npm prune --omit=dev",
+        "rm -rf node_modules/next node_modules/@next node_modules/@img node_modules/typescript node_modules/vite node_modules/vitest node_modules/@vitest node_modules/rolldown node_modules/@rolldown"
       ]
     }
   },
   "deploy": {
+    "inputs": [
+      {
+        "step": "packages:mise",
+        "include": [
+          "/mise/shims",
+          "/mise/installs",
+          "/usr/local/bin/mise",
+          "/etc/mise/config.toml",
+          "/root/.local/state/mise"
+        ]
+      },
+      {
+        "step": "build",
+        "include": [
+          "package.json",
+          "scripts",
+          "node_modules",
+          "apps/api/package.json",
+          "apps/api/prisma.config.ts",
+          "apps/api/prisma",
+          "apps/api/dist",
+          "apps/web/.next/standalone"
+        ]
+      }
+    ],
     "startCommand": "node scripts/start.mjs",
     "variables": { "MALLOC_ARENA_MAX": "2" }
   }

@@ -42,7 +42,8 @@ Tests: `npm test -w api` (unitarios) y `npm run test:e2e -w api` (necesita Redis
 
 Un solo servicio con Railpack (`railpack.json` en la raíz). El arranque (`node scripts/start.mjs`) aplica las migraciones y levanta los dos procesos en el mismo contenedor: la API en el puerto 4000 (heap 256 MB) y la web standalone en `PORT` (3000 por defecto, heap 384 MB). Si cualquiera de los dos se cae, el contenedor se baja entero para que Dokploy lo reinicie.
 
-- Railpack 0.39 o superior y `RAILPACK_PRUNE_DEPS=true` (el arranque solo usa `node` y el CLI de Prisma, que está en `dependencies`).
+- Railpack 0.39 o superior. `RAILPACK_PRUNE_DEPS` no hace falta: el `railpack.json` poda las dependencias en el paso de build y con `deploy.inputs` arma la imagen solo con el standalone de la web, el `dist` y `prisma/` del API y el `node_modules` de producción.
+- El `node_modules` de la raíz se poda a mano porque `npm prune` no alcanza en este repo: Railpack define `NPM_CONFIG_PRODUCTION=false` (que anula el `--omit=dev`) y `better-auth` y Prisma traen `next`, `vitest` y `typescript` como dependencias opcionales que npm deja como de producción. La web corre con su propia copia de `next` dentro del standalone. Los paquetes de Prisma Studio no se pueden sacar: sin ellos el CLI no arranca y fallan las migraciones.
 - Memory Limit: unos 1,3 GB (el doble de la suma de los dos heaps).
 - Puerto del dominio: el de la web (3000). La API no se expone; la web la alcanza por `127.0.0.1:4000`.
 - Bind mount de fotos en `/srv/uploads/liceo-laprida`, con `UPLOADS_DIR` igual al Mount Path.
