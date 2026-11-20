@@ -68,7 +68,8 @@ model Course {
   updatedAt      DateTime     @updatedAt
   enrollments    Enrollment[]
 
-  @@index([category])
+  @@index([category], map: "Course_category_idx")
+  @@map("course")
 }
 
 /// Editable site blocks (hero, story, contact, offers...), one row per block, edited whole from the admin.
@@ -76,6 +77,8 @@ model SiteContent {
   key       String   @id @db.VarChar(60)
   value     Json
   updatedAt DateTime @updatedAt
+
+  @@map("sitecontent")
 }
 
 model Enrollment {
@@ -86,7 +89,7 @@ model Enrollment {
   email       String           @db.VarChar(254)
   phone       String           @db.VarChar(40)
   courseId    String?          @db.VarChar(120)
-  course      Course?          @relation(fields: [courseId], references: [id], onDelete: SetNull)
+  course      Course?          @relation(fields: [courseId], references: [id], onDelete: SetNull, map: "Enrollment_courseId_fkey")
   courseTitle String           @db.VarChar(200)
   modality    CourseFormat
   shift       String           @db.VarChar(60)
@@ -95,7 +98,7 @@ model Enrollment {
   amount      Int
   notes       String           @db.Text
   source      EnrollmentSource @default(web)
-  mpOrderId   String?          @unique @db.VarChar(64)
+  mpOrderId   String?          @unique(map: "Enrollment_mpOrderId_key") @db.VarChar(64)
   mpStatus    String?          @db.VarChar(40)
   paidAt      DateTime?
   access      AccessStatus     @default(no_solicitado)
@@ -103,9 +106,10 @@ model Enrollment {
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 
-  @@index([createdAt])
-  @@index([courseId])
-  @@index([dni])
+  @@index([createdAt], map: "Enrollment_createdAt_idx")
+  @@index([courseId], map: "Enrollment_courseId_idx")
+  @@index([dni], map: "Enrollment_dni_idx")
+  @@map("enrollment")
 }
 
 model User {

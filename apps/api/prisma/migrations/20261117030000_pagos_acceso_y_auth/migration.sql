@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `Enrollment` ADD COLUMN `access` ENUM('no_solicitado', 'pendiente', 'otorgado', 'fallido') NOT NULL DEFAULT 'no_solicitado',
+ALTER TABLE `enrollment` ADD COLUMN `access` ENUM('no_solicitado', 'pendiente', 'otorgado', 'fallido') NOT NULL DEFAULT 'no_solicitado',
     ADD COLUMN `accessNote` VARCHAR(500) NULL,
     ADD COLUMN `mpOrderId` VARCHAR(64) NULL,
     ADD COLUMN `mpStatus` VARCHAR(40) NULL,
@@ -70,7 +70,7 @@ CREATE TABLE `verification` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateIndex
-CREATE UNIQUE INDEX `Enrollment_mpOrderId_key` ON `Enrollment`(`mpOrderId`);
+CREATE UNIQUE INDEX `Enrollment_mpOrderId_key` ON `enrollment`(`mpOrderId`);
 
 -- AddForeignKey
 ALTER TABLE `session` ADD CONSTRAINT `session_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `user`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

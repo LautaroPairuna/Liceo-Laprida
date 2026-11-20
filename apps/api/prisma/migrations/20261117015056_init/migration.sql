@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `Course` (
+CREATE TABLE `course` (
     `id` VARCHAR(120) NOT NULL,
     `title` VARCHAR(200) NOT NULL,
     `category` VARCHAR(60) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE `Course` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `SiteContent` (
+CREATE TABLE `sitecontent` (
     `key` VARCHAR(60) NOT NULL,
     `value` JSON NOT NULL,
     `updatedAt` DATETIME(3) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `SiteContent` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Enrollment` (
+CREATE TABLE `enrollment` (
     `id` VARCHAR(191) NOT NULL,
     `code` VARCHAR(20) NOT NULL,
     `name` VARCHAR(200) NOT NULL,
@@ -63,4 +63,4 @@ CREATE TABLE `Enrollment` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Enrollment` ADD CONSTRAINT `Enrollment_courseId_fkey` FOREIGN KEY (`courseId`) REFERENCES `Course`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `enrollment` ADD CONSTRAINT `Enrollment_courseId_fkey` FOREIGN KEY (`courseId`) REFERENCES `course`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
