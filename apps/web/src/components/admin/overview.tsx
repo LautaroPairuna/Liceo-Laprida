@@ -123,7 +123,7 @@ export function Overview() {
       <div className="houses">
         <article className="house house-liceo">
           <header className="house-head">
-            <img className="house-logo" src="/logo.png" alt="" />
+            <img className="house-logo" src="/logo.webp" alt="" />
             <div>
               <p className="house-kicker">Sede en San Juan</p>
               <h2>Liceo Laprida</h2>

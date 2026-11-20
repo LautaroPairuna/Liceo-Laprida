@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type CSSProperties, type FormEvent, useState } from "react";
+import { sizedImage } from "@/lib/image-url";
 import { courseFormats, formatMoney, modalityById } from "@/lib/institution";
 import { discountFor, type Promo, priceFor } from "@/lib/pricing";
 import type { Course, Format, SiteContent } from "@/lib/types";
@@ -217,7 +218,13 @@ export function CheckoutForm({ courses, content }: Props) {
               className="summary-course"
               style={{ "--accent": category?.color } as CSSProperties}
             >
-              <img src={course.image} alt="" width="1400" height="900" loading="lazy" />
+              <img
+                src={sizedImage(course.image, 400)}
+                alt=""
+                width="1400"
+                height="900"
+                loading="lazy"
+              />
               <div>
                 <span>{category?.name}</span>
                 <h2>{course.title}</h2>

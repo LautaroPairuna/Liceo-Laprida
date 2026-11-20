@@ -147,7 +147,7 @@ function CatalogBanner({ modality, content }: { modality: Format; content: SiteC
           </span>
         ) : (
           <span className="catalog-banner-logo">
-            <img src="/logo.png" alt="Liceo Profesional Laprida" />
+            <img src="/logo.webp" alt="Liceo Profesional Laprida" width="360" height="251" />
           </span>
         )}
         <div className="catalog-banner-copy">

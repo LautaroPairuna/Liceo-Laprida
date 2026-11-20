@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { imageSrcSet, sizedImage } from "@/lib/image-url";
 import {
   accentStyle,
   courseFormats,
@@ -46,7 +47,7 @@ export function CatalogSection({ content, courses }: { content: SiteContent; cou
                 {item.id === "presencial" ? (
                   <span className="modality-seal">
                     <span className="modality-seal-mark" aria-hidden="true">
-                      <img src="/logo.png" alt="" />
+                      <img src="/logo.webp" alt="" width="360" height="251" />
                     </span>
                     <span>
                       <small>En el</small>
@@ -123,7 +124,15 @@ function OfferCard({ offer, category }: { offer: OfferItem; category?: Category 
   return (
     <article className={`offer-card offer-card-${offer.kind}`} style={style}>
       <div className="offer-media">
-        <img src={offer.image} alt="" width="1400" height="900" />
+        <img
+          src={sizedImage(offer.image, 800)}
+          srcSet={imageSrcSet(offer.image, [480, 800])}
+          sizes="(max-width: 560px) 82vw, 370px"
+          alt=""
+          width="1400"
+          height="900"
+          loading="lazy"
+        />
       </div>
       <div className="offer-body">
         {category ? (
@@ -388,7 +397,7 @@ export function ContactSection({ content }: { content: SiteContent }) {
         <article className="contact-liceo" aria-labelledby="contacto-liceo" data-reveal>
           <div className="contact-liceo-brand">
             <span className="contact-liceo-logo">
-              <img src="/logo.png" alt="" />
+              <img src="/logo.webp" alt="" width="360" height="251" loading="lazy" />
             </span>
             <div>
               <small>Sede presencial</small>

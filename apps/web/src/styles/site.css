@@ -472,7 +472,11 @@ p {
   inset: 0;
 }
 .hero-video video,
-.hero-video img {
+.hero-video img,
+.ambient-poster,
+.ambient-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1200,8 +1204,7 @@ p {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: #082f5b center / cover no-repeat;
-  background-image: url("/catalog-sede-poster.jpg");
+  background: #082f5b;
 }
 .catalog-banner-video video {
   width: 100%;

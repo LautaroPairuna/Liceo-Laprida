@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { imageSrcSet, sizedImage } from "@/lib/image-url";
 import { accentStyle, courseFormats, formatMoney, modalityById } from "@/lib/institution";
 import type { Category, Course } from "@/lib/types";
 
@@ -14,7 +15,15 @@ export function CourseCard({ course, category }: { course: Course; category?: Ca
   return (
     <article className="course-card" style={style}>
       <Link href={`/cursos/${course.id}`} className="card-media">
-        <img src={course.image} alt={course.title} width="1400" height="900" loading="lazy" />
+        <img
+          src={sizedImage(course.image, 800)}
+          srcSet={imageSrcSet(course.image, [480, 800])}
+          sizes="(max-width: 720px) 90vw, 370px"
+          alt={course.title}
+          width="1400"
+          height="900"
+          loading="lazy"
+        />
         <span className="card-chip">{category?.name}</span>
         {course.ministry ? <span className="card-seal">Ministerio</span> : null}
       </Link>

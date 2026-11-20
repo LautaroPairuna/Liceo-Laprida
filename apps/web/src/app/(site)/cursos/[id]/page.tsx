@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 import { CourseCard } from "@/components/site/course-card";
+import { imageSrcSet, sizedImage } from "@/lib/image-url";
 import { courseFormats, formatMoney, isFormat, modalityById } from "@/lib/institution";
 import { getCourse } from "@/lib/site";
 
@@ -66,7 +67,15 @@ export default async function CourseDetailPage({
         data-theme="dark"
         style={{ "--accent": category.color } as CSSProperties}
       >
-        <img src={course.image} alt="" width="1400" height="900" fetchPriority="high" />
+        <img
+          src={sizedImage(course.image, 1600)}
+          srcSet={imageSrcSet(course.image, [800, 1200, 1600])}
+          sizes="100vw"
+          alt=""
+          width="1400"
+          height="900"
+          fetchPriority="high"
+        />
         <div className="detail-hero-copy enter">
           <Link
             href={`/cursos?modalidad=${activeFormat?.id ?? "presencial"}&area=${course.category}`}

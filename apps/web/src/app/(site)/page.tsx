@@ -66,7 +66,7 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
           {hero.video ? (
             <AmbientVideo src={hero.video} poster={hero.poster} />
           ) : (
-            <img src={hero.poster} alt="" />
+            <img src={hero.poster} alt="" fetchPriority="high" />
           )}
         </div>
         <div className="hero-inner">
