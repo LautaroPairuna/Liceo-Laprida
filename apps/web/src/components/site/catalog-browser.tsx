@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { type CSSProperties, useDeferredValue } from "react";
+import { type CSSProperties, useDeferredValue, useRef } from "react";
 import {
   accentFor,
   accentStyle,
@@ -15,10 +16,24 @@ import { CatalogRow } from "./catalog-row";
 
 type Props = { modality: Format; courses: Course[]; categories: Category[] };
 
+// 12 fills whole rows in the 3, 2 and 1 column layouts of the grid.
+const PAGE_SIZE = 12;
+
+/** Page numbers to show: first, last and the current one with its neighbours; null = gap. */
+function pageItems(current: number, total: number): (number | null)[] {
+  const pages = [...new Set([1, current - 1, current, current + 1, total])]
+    .filter((page) => page >= 1 && page <= total)
+    .sort((a, b) => a - b);
+  return pages.flatMap((page, index) =>
+    index > 0 && page - pages[index - 1] > 1 ? [null, page] : [page],
+  );
+}
+
 export function CatalogBrowser({ modality, courses, categories }: Props) {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const boardRef = useRef<HTMLDivElement>(null);
   const activeModality = modalityById.get(modality) ?? modalities[0];
   const categoryById = new Map(categories.map((category) => [category.id, category]));
   const requestedArea = params.get("area") || "all";
@@ -36,6 +51,8 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
 
   const updateParams = (changes: Record<string, string>) => {
     const next = new URLSearchParams(params.toString());
+    // Any filter change starts over from the first page.
+    if (!("pagina" in changes)) next.delete("pagina");
     for (const [key, value] of Object.entries(changes)) {
       if (!value || value === "all") next.delete(key);
       else next.set(key, value);
@@ -70,8 +87,26 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
     return matchModality && matchArea && matchQuery && matchDuration && matchStart;
   });
 
+  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const requestedPage = Number.parseInt(params.get("pagina") ?? "1", 10);
+  const page = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
+  const firstShown = (page - 1) * PAGE_SIZE;
+  const pageCourses = filtered.slice(firstShown, firstShown + PAGE_SIZE);
+  const pageHref = (target: number) => {
+    const next = new URLSearchParams(params.toString());
+    if (target === 1) next.delete("pagina");
+    else next.set("pagina", String(target));
+    return `${pathname}?${next.toString()}`;
+  };
+  const toBoardTop = () => {
+    const board = boardRef.current;
+    if (!board) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    board.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  };
+
   const narrowing = area !== "all" || query || duration !== "all" || inicio !== "all";
-  const motionKey = `${modality}|${area}|${duration}|${inicio}`;
+  const motionKey = `${modality}|${area}|${duration}|${inicio}|${page}`;
   const clearFilters = () => updateParams({ area: "all", q: "", duracion: "all", inicio: "all" });
   const noun = filtered.length === 1 ? "curso" : "cursos";
   const modeName =
@@ -192,9 +227,16 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
           ) : null}
         </form>
 
-        <div className="catalog-board">
+        <div className="catalog-board" ref={boardRef}>
           <h2 className="visually-hidden">Cursos disponibles</h2>
-          <p className="catalog-count">{countLabel}</p>
+          <p className="catalog-count">
+            {countLabel}
+            {pageCount > 1 ? (
+              <small>
+                Mostrando {firstShown + 1}–{firstShown + pageCourses.length}
+              </small>
+            ) : null}
+          </p>
           <div className="catalog-results" key={motionKey}>
             {filtered.length === 0 ? (
               <div className="empty-state">
@@ -219,7 +261,7 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
               </div>
             ) : (
               <div className="catalog-grid">
-                {filtered.map((course) => (
+                {pageCourses.map((course) => (
                   <CatalogRow
                     key={course.id}
                     course={course}
@@ -232,6 +274,63 @@ export function CatalogBrowser({ modality, courses, categories }: Props) {
               </div>
             )}
           </div>
+
+          {pageCount > 1 ? (
+            <nav className="catalog-pagination" aria-label="Páginas del catálogo">
+              {page > 1 ? (
+                <Link
+                  className="catalog-page-step"
+                  href={pageHref(page - 1)}
+                  scroll={false}
+                  replace
+                  onClick={toBoardTop}
+                >
+                  Anterior
+                </Link>
+              ) : (
+                <span className="catalog-page-step" aria-disabled="true">
+                  Anterior
+                </span>
+              )}
+              <ol>
+                {pageItems(page, pageCount).map((item, index) =>
+                  item === null ? (
+                    <li key={`gap-${index}`} className="catalog-page-gap" aria-hidden="true">
+                      …
+                    </li>
+                  ) : (
+                    <li key={item}>
+                      <Link
+                        href={pageHref(item)}
+                        scroll={false}
+                        replace
+                        onClick={toBoardTop}
+                        aria-current={item === page ? "page" : undefined}
+                        aria-label={`Página ${item}`}
+                      >
+                        {item}
+                      </Link>
+                    </li>
+                  ),
+                )}
+              </ol>
+              {page < pageCount ? (
+                <Link
+                  className="catalog-page-step"
+                  href={pageHref(page + 1)}
+                  scroll={false}
+                  replace
+                  onClick={toBoardTop}
+                >
+                  Siguiente
+                </Link>
+              ) : (
+                <span className="catalog-page-step" aria-disabled="true">
+                  Siguiente
+                </span>
+              )}
+            </nav>
+          ) : null}
         </div>
       </div>
     </div>
