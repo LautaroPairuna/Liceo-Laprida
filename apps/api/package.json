@@ -4,21 +4,18 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
-  "engines": {
-    "node": "24.x"
-  },
   "scripts": {
-    "build": "nest build",
-    "start": "node dist/main.js",
+    "build": "nest build && node scripts/empaquetar.mjs",
+    "start": "node dist/bundle/main.mjs",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "prisma migrate deploy && node dist/main.js",
+    "start:prod": "node dist/bundle/main.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
-    "db:seed:prod": "node dist/scripts/seed.js",
+    "db:seed:prod": "node dist/bundle/seed.mjs",
     "admin:create": "tsx src/scripts/create-admin.ts",
     "admin:create:prod": "node dist/scripts/create-admin.js",
     "postinstall": "prisma generate"
@@ -37,15 +34,16 @@
     "mercadopago": "^3.6.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "zod": "^4.6.7",
-    "prisma": "^7.10.1",
-    "dotenv": "^18.0.10"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^12.0.13",
     "@nestjs/schematics": "^12.0.0",
     "@nestjs/testing": "^12.5.1",
     "@types/node": "^24.0.0",
+    "dotenv": "^18.0.10",
+    "esbuild": "^0.28.2",
+    "prisma": "^7.10.1",
     "source-map-support": "^0.5.21",
     "tsx": "^4.23.15",
     "typescript": "6.0.3",

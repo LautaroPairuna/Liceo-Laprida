@@ -1,17 +1,24 @@
 {
   "$schema": "https://schema.railpack.com",
+  // Node sale de "engines" del package.json; el build, del script de la raiz:
+  // arma el API (empaquetado en dist/bundle) y el sitio (standalone).
   "steps": {
     "build": {
       "commands": [
         "...",
         "cp -r apps/web/.next/static apps/web/.next/standalone/apps/web/.next/static",
         "cp -r apps/web/public apps/web/.next/standalone/apps/web/public",
-        "env -u NPM_CONFIG_PRODUCTION npm prune --omit=dev",
-        "rm -rf node_modules/next node_modules/@next node_modules/@img node_modules/typescript node_modules/vite node_modules/vitest node_modules/@vitest node_modules/rolldown node_modules/@rolldown"
+        "rm -f apps/web/.next/standalone/.env* apps/web/.next/standalone/apps/web/.env*",
+        "test -f apps/web/.next/standalone/apps/web/server.js",
+        "test -f apps/api/dist/bundle/main.mjs",
+        "test -f apps/api/prisma/seed-data.json"
       ]
     }
   },
   "deploy": {
+    // Solo Node y lo compilado: ni node_modules de la raiz ni el codigo. El
+    // standalone trae su propio node_modules con lo que usa el sitio, y el API
+    // tiene sus dependencias adentro de dist/bundle.
     "inputs": [
       {
         "step": "packages:mise",
@@ -26,18 +33,23 @@
       {
         "step": "build",
         "include": [
-          "package.json",
-          "scripts",
-          "node_modules",
-          "apps/api/package.json",
-          "apps/api/prisma.config.ts",
-          "apps/api/prisma",
-          "apps/api/dist",
-          "apps/web/.next/standalone"
+          "apps/web/.next/standalone",
+          "apps/api/dist/bundle",
+          "apps/api/prisma/seed-data.json",
+          "scripts/arrancar.sh"
         ]
       }
     ],
-    "startCommand": "node scripts/start.mjs",
-    "variables": { "MALLOC_ARENA_MAX": "2" }
+    "startCommand": "exec bash scripts/arrancar.sh",
+    "variables": {
+      // El server standalone de Next escucha en HOSTNAME, y dentro de Docker esa
+      // variable trae el nombre del contenedor.
+      "HOSTNAME": "0.0.0.0",
+      // Para los dos procesos. Va aca y no en el Environment del servicio para que
+      // no le llegue al build: `next build` necesita bastante mas.
+      "NODE_OPTIONS": "--max-old-space-size=384 --max-semi-space-size=4",
+      // Que sharp no fragmente la memoria con las arenas de glibc.
+      "MALLOC_ARENA_MAX": "2"
+    }
   }
 }

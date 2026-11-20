@@ -5,7 +5,7 @@
     "apps/*"
   ],
   "engines": {
-    "node": "24.x"
+    "node": "24.22.1"
   },
   "scripts": {
     "dev": "concurrently -k -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
@@ -15,7 +15,14 @@
     "test": "npm test -w api",
     "lint": "biome check",
     "format": "biome format --write",
-    "start": "node scripts/start.mjs"
+    "start": "bash scripts/arrancar.sh"
+  },
+  "allowScripts": {
+    "@prisma/engines": true,
+    "prisma": true,
+    "esbuild": true,
+    "msgpackr-extract": false,
+    "fsevents": false
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.8",
