@@ -33,13 +33,14 @@ export function CatalogSection({ content, courses }: { content: SiteContent; cou
   return (
     <section id="catalogo" className="home-catalog snap-section" aria-label="Formatos de cursado">
       <div className="section-wrap">
-        <div className="format-rail">
+        <div className="format-rail" data-reveal-stagger>
           {modalities.map((item) => {
             const count = counts.get(item.id) ?? 0;
             return (
               <Link
                 key={item.id}
                 className={`format-card format-${item.id}`}
+                data-reveal
                 href={`/cursos?modalidad=${item.id}`}
               >
                 {item.id === "presencial" ? (
@@ -192,11 +193,11 @@ export function OffersSection({ content, courses }: { content: SiteContent; cour
   return (
     <section id="ofertas" className="home-offers snap-section">
       <div className="section-wrap offers-shell">
-        <header className="offers-head">
+        <header className="offers-head" data-reveal>
           <h2>{content.offers.title}</h2>
         </header>
 
-        <div className="offer-marquee" id="ofertas-carrusel">
+        <div className="offer-marquee" id="ofertas-carrusel" data-reveal>
           <section
             className="offer-track"
             aria-roledescription="carrusel"
@@ -262,7 +263,7 @@ export function StudentsSection({ reviews }: { reviews: SiteContent["reviews"] }
   return (
     <section id="alumnos" className="review-band" aria-labelledby="resenas-title">
       <div className="review-band-inner">
-        <header className="review-band-label">
+        <header className="review-band-label" data-reveal>
           <h3 id="resenas-title">Reseñas</h3>
           <div className="review-score">
             <strong className="review-score-value">{score}</strong>
@@ -272,7 +273,7 @@ export function StudentsSection({ reviews }: { reviews: SiteContent["reviews"] }
           <MarqueePause target="resenas-carrusel" label="el carrusel de reseñas" />
         </header>
 
-        <div className="review-marquee" id="resenas-carrusel">
+        <div className="review-marquee" id="resenas-carrusel" data-reveal>
           <div className="review-track">
             <div className="review-group">
               {reviews.items.map((item, index) => (
@@ -293,6 +294,8 @@ export function StudentsSection({ reviews }: { reviews: SiteContent["reviews"] }
 
 export function InstitutionSection({ content }: { content: SiteContent }) {
   const { story, contact } = content;
+  const founded = Number.parseInt(story.milestones.find((item) => item.dateTime)?.year ?? "", 10);
+  const years = Number.isFinite(founded) ? new Date().getFullYear() - founded : 0;
 
   return (
     <section
@@ -301,15 +304,47 @@ export function InstitutionSection({ content }: { content: SiteContent }) {
       aria-labelledby="institucion-title"
     >
       <div className="section-wrap institution-layout">
-        <header className="institution-intro">
-          <p className="section-kicker">La institución</p>
-          <h2 id="institucion-title">{story.title}</h2>
-          <p>{story.lead}</p>
-        </header>
+        <div className="institution-top">
+          <header className="institution-intro" data-reveal>
+            <p className="section-kicker">La institución</p>
+            <h2 id="institucion-title">{story.title}</h2>
+            <p>{story.lead}</p>
+          </header>
 
-        <ol className="history-rail" aria-label="Trayectoria del Liceo Profesional Laprida">
+          <figure className={story.facade ? "sede-card sede-card-photo" : "sede-card"} data-reveal>
+            {story.facade ? (
+              <img
+                src={story.facade}
+                alt={story.facadeAlt || "Fachada del Liceo Profesional Laprida"}
+                loading="lazy"
+              />
+            ) : null}
+            <figcaption>
+              {years > 0 ? (
+                <span className="sede-since">
+                  {years} años
+                  <small>enseñando oficios en San Juan</small>
+                </span>
+              ) : null}
+              <strong>{contact.legalName}</strong>
+              <span>
+                {contact.address}, {contact.locality}
+              </span>
+              <a href="#contacto" className="sede-link">
+                Cómo llegar <IconArrow />
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+
+        <ol
+          className="history-rail"
+          aria-label="Trayectoria del Liceo Profesional Laprida"
+          data-reveal
+          data-reveal-stagger
+        >
           {story.milestones.map((item) => (
-            <li key={`${item.year}-${item.title}`}>
+            <li key={`${item.year}-${item.title}`} data-reveal>
               {item.dateTime ? (
                 <time dateTime={item.dateTime}>{item.year}</time>
               ) : (
@@ -321,41 +356,21 @@ export function InstitutionSection({ content }: { content: SiteContent }) {
           ))}
         </ol>
 
-        <div className="institution-split">
-          <div className="institution-copy">
-            <article>
-              <h3>{story.purposeTitle}</h3>
-              <p>{story.purpose}</p>
-            </article>
-            <article>
-              <h3>{story.visionTitle}</h3>
-              <p>{story.vision}</p>
-            </article>
-          </div>
-
-          <figure className="facade-slot">
-            {story.facade ? (
-              <img
-                className="facade-photo"
-                src={story.facade}
-                alt={story.facadeAlt || "Fachada del Liceo Profesional Laprida"}
-              />
-            ) : (
-              <div
-                className="facade-mount"
-                role="img"
-                aria-label={
-                  story.facadeAlt ||
-                  "Espacio reservado para la fotografía de la fachada del Liceo Profesional Laprida"
-                }
-              >
-                <span>Fachada del liceo</span>
-              </div>
-            )}
-            <figcaption>
-              {contact.legalName} · {contact.address}, {contact.locality}
-            </figcaption>
-          </figure>
+        <div className="institution-pillars" data-reveal-stagger>
+          <article className="pillar" data-reveal>
+            <span className="pillar-index" aria-hidden="true">
+              01
+            </span>
+            <h3>{story.purposeTitle}</h3>
+            <p>{story.purpose}</p>
+          </article>
+          <article className="pillar pillar-dark" data-reveal>
+            <span className="pillar-index" aria-hidden="true">
+              02
+            </span>
+            <h3>{story.visionTitle}</h3>
+            <p>{story.vision}</p>
+          </article>
         </div>
       </div>
     </section>
@@ -370,7 +385,7 @@ export function ContactSection({ content }: { content: SiteContent }) {
   return (
     <section id="contacto" className="home-contact snap-section" aria-label="Ubicación y contacto">
       <div className="contact-halves">
-        <article className="contact-liceo" aria-labelledby="contacto-liceo">
+        <article className="contact-liceo" aria-labelledby="contacto-liceo" data-reveal>
           <div className="contact-liceo-brand">
             <span className="contact-liceo-logo">
               <img src="/logo.png" alt="" />
@@ -461,7 +476,7 @@ export function ContactSection({ content }: { content: SiteContent }) {
           </div>
         </article>
 
-        <article className="contact-red" aria-labelledby="contacto-red">
+        <article className="contact-red" aria-labelledby="contacto-red" data-reveal>
           <div className="contact-red-lockup">
             <span className="contact-red-sigil" aria-hidden="true">
               <img src="/red-cima-mark.svg" alt="" width={192} height={192} />

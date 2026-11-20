@@ -1,5 +1,6 @@
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
+import { ScrollReveal } from "@/components/site/scroll-reveal";
 import { getSite } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -15,6 +16,7 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
       <Header whatsapp={content.contact.whatsapp} />
       {children}
       <Footer content={content} />
+      <ScrollReveal />
     </>
   );
 }

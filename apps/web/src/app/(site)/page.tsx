@@ -93,7 +93,7 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
       <div className="home-record">
         <section className="home-bridge snap-section" aria-labelledby="aprender-title">
           <div className="section-wrap bridge-layout">
-            <div className="bridge-copy">
+            <div className="bridge-copy" data-reveal>
               <p className="section-kicker">{learning.kicker}</p>
               <h2 id="aprender-title">{learning.title}</h2>
               <p>{learning.text}</p>
@@ -106,12 +106,14 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
 
             <section
               className="learning-gallery"
+              data-reveal-stagger
               aria-label="Alumnos aprendiendo en clases prácticas"
             >
               {learning.photos.map((photo, index) => (
                 <figure
                   key={`${photo.caption}-${index}`}
                   className={index === 0 ? "learning-gallery-main" : undefined}
+                  data-reveal
                 >
                   {photo.src ? (
                     <img

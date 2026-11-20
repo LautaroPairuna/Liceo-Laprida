@@ -1845,127 +1845,224 @@ p {
 }
 .institution-layout {
   display: grid;
-  gap: clamp(32px, 4vw, 48px);
+  gap: clamp(44px, 6vw, 72px);
+}
+.institution-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
 }
 .institution-intro h2 {
-  max-width: 16ch;
-  font-size: clamp(2.15rem, 3.5vw, 3.4rem);
+  max-width: 13ch;
+  font-size: clamp(2.4rem, 4.4vw, 4.1rem);
+  line-height: 0.98;
 }
 .institution-intro > p {
-  max-width: 62ch;
-  margin-top: 14px;
+  max-width: 50ch;
+  margin-top: 20px;
   color: #3c5060;
+  font-size: 1.12rem;
 }
+
+/* Sede: the facade photo, or a navy card with the same facts when there is no photo yet */
+.sede-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 24px;
+  background-color: var(--navy);
+  background-image:
+    radial-gradient(120% 90% at 100% 0%, rgba(46, 198, 245, 0.28), transparent 60%),
+    repeating-linear-gradient(112deg, transparent 0 10px, rgba(255, 255, 255, 0.045) 10px 11px);
+  box-shadow: var(--shadow-lg);
+  color: white;
+}
+.sede-card img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sede-card-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 47, 91, 0.92));
+}
+.sede-card figcaption {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: clamp(24px, 3vw, 34px);
+}
+.sede-since {
+  margin-bottom: 10px;
+  color: white;
+  font-family: var(--display);
+  font-size: clamp(4rem, 7vw, 5.6rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+}
+.sede-since small {
+  display: block;
+  margin-top: 10px;
+  color: var(--sky);
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.sede-card-photo .sede-since {
+  font-size: clamp(2.6rem, 4vw, 3.4rem);
+}
+.sede-card strong {
+  font-family: var(--display);
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sede-card figcaption > span:not(.sede-since) {
+  color: rgba(255, 255, 255, 0.82);
+}
+.sede-link {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: white;
+  color: var(--navy);
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+.sede-link:hover {
+  transform: translateX(3px);
+}
+.sede-link:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+.sede-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Timeline */
 .history-rail {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 36px);
+  gap: clamp(18px, 3vw, 40px);
 }
 .history-rail::before {
   content: "";
   position: absolute;
-  top: 4px;
+  top: 7px;
   left: 0;
   right: 0;
   height: 2px;
-  background: rgba(8, 47, 91, 0.35);
+  background: linear-gradient(90deg, var(--navy), var(--navy) 66%, var(--maize));
+  transform-origin: left;
 }
 .history-rail li {
   position: relative;
   display: grid;
-  gap: 6px;
+  gap: 8px;
   align-content: start;
-  padding-top: 22px;
+  padding-top: 38px;
 }
 .history-rail li::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--navy);
-  box-shadow: 0 0 0 4px #e4ebf1;
+  box-shadow: 0 0 0 5px #e4ebf1;
 }
 .history-rail li:last-child::before {
   background: var(--maize);
   box-shadow:
-    0 0 0 3px var(--navy),
-    0 0 0 6px #e4ebf1;
+    0 0 0 4px var(--navy),
+    0 0 0 8px #e4ebf1;
 }
 .history-rail time,
 .history-now {
   color: var(--navy);
   font-family: var(--display);
-  font-size: 1.45rem;
+  font-size: clamp(2.8rem, 4.2vw, 3.8rem);
   font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.history-now {
+  color: var(--maize-dark);
 }
 .history-rail strong {
+  margin-top: 4px;
   color: var(--navy);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 .history-rail p {
-  max-width: 36ch;
+  max-width: 34ch;
   color: #3c5060;
   font-size: 0.98rem;
 }
-.institution-split {
+
+/* Purpose and vision */
+.institution-pillars {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(240px, 0.7fr);
-  gap: clamp(28px, 4vw, 64px);
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
 }
-.institution-copy {
+.pillar {
+  position: relative;
   display: grid;
-  gap: 28px;
+  align-content: start;
+  gap: 12px;
+  padding: clamp(28px, 3.4vw, 44px);
+  border-radius: 24px;
+  background: white;
+  box-shadow: var(--shadow-sm);
 }
-.institution-copy h3 {
-  font-size: clamp(1.65rem, 2vw, 2.05rem);
+.pillar h3 {
+  color: var(--navy);
+  font-size: clamp(1.9rem, 2.6vw, 2.5rem);
 }
-.institution-copy p {
-  max-width: 58ch;
-  margin-top: 10px;
+.pillar p {
   color: #3c5060;
+  font-size: 1.05rem;
 }
-.facade-slot {
-  display: grid;
-  gap: 10px;
-}
-.facade-mount {
-  aspect-ratio: 4 / 5;
-  display: flex;
-  align-items: flex-end;
-  min-height: 280px;
-  padding: 20px;
-  border: 12px solid white;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 40%), #16365c;
-  box-shadow: 0 18px 40px rgba(8, 47, 91, 0.16);
-}
-.facade-mount span {
-  max-width: 12ch;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.45);
-  color: white;
+.pillar-index {
+  color: var(--blue);
   font-family: var(--display);
-  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  font-size: 1.1rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  letter-spacing: 0.04em;
 }
-.facade-photo {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border: 12px solid white;
-  box-shadow: 0 18px 40px rgba(8, 47, 91, 0.16);
+.pillar-dark {
+  background: var(--navy);
 }
-.facade-slot figcaption {
-  color: #3c5060;
-  font-size: 0.98rem;
+.pillar-dark h3 {
+  color: white;
+}
+.pillar-dark p {
+  color: rgba(255, 255, 255, 0.85);
+}
+.pillar-dark .pillar-index {
+  color: var(--sky);
 }
 
 /* Location and contact */
@@ -3083,6 +3180,36 @@ p {
   }
 }
 
+/* Scroll reveal (see components/site/scroll-reveal.tsx). Without JS, or with reduced
+   motion, no data-reveal-state is ever set and everything stays visible. */
+[data-reveal-state="pending"] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+[data-reveal-state="in"] {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-i, 0) * 120ms);
+}
+/* The timeline itself doesn't move: its line draws from left to right and the
+   milestones come in one by one. */
+.history-rail[data-reveal-state] {
+  opacity: 1;
+  transform: none;
+}
+.history-rail[data-reveal-state="pending"]::before {
+  transform: scaleX(0);
+}
+.history-rail[data-reveal-state="in"]::before {
+  transition: transform 1.3s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
+}
+@media (max-width: 820px) {
+  .history-rail[data-reveal-state="pending"]::before {
+    transform: none;
+  }
+}
+
 @media (min-width: 981px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
   html {
     scroll-snap-type: y proximity;
@@ -3290,7 +3417,8 @@ p {
   }
 
   .bridge-layout,
-  .institution-split {
+  .institution-top,
+  .institution-pillars {
     grid-template-columns: 1fr;
   }
   .contact-halves,
@@ -3314,21 +3442,19 @@ p {
     display: none;
   }
   .history-rail li {
-    padding: 0 0 22px 22px;
-    border-left: 2px solid rgba(8, 47, 91, 0.35);
+    padding: 0 0 30px 30px;
+    border-left: 2px solid var(--navy);
   }
   .history-rail li:last-child {
     padding-bottom: 0;
     border-left-color: transparent;
   }
   .history-rail li::before {
-    top: 2px;
-    left: -6px;
+    top: 4px;
+    left: -9px;
   }
-  .facade-mount,
-  .facade-photo {
-    aspect-ratio: 16 / 10;
-    min-height: 0;
+  .sede-card {
+    min-height: 280px;
   }
   .contact-map,
   .contact-map .lpl-map,
@@ -3728,8 +3854,7 @@ p {
   font-size: 0.9rem;
 }
 .contact-line,
-.contact-hours,
-.facade-slot figcaption {
+.contact-hours {
   font-size: 1rem;
 }
 .site-footer h2 {
