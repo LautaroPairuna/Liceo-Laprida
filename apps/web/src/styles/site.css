@@ -1506,12 +1506,16 @@ p {
   animation-play-state: paused;
 }
 .offer-group {
+  flex: none;
   display: flex;
   gap: 18px;
   padding-right: 18px;
 }
 .offer-card {
-  flex: 0 0 clamp(280px, 31vw, 370px);
+  /* Explicit width (not just flex-basis) so every browser measures the group the same
+     way; otherwise the copy that closes the loop can overlap the last card. */
+  flex: none;
+  width: clamp(280px, 31vw, 370px);
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1769,12 +1773,14 @@ p {
   animation-play-state: paused;
 }
 .review-group {
+  flex: none;
   display: flex;
   gap: 14px;
   padding-right: 14px;
 }
 .review-group .review-card {
-  flex: 0 0 clamp(280px, 28vw, 360px);
+  flex: none;
+  width: clamp(280px, 28vw, 360px);
 }
 .review-card {
   min-width: 0;
@@ -3298,7 +3304,7 @@ p {
     height: 430px;
   }
   .review-group .review-card {
-    flex-basis: min(78vw, 360px);
+    width: min(78vw, 360px);
   }
   .history-rail {
     grid-template-columns: 1fr;
@@ -3331,7 +3337,7 @@ p {
     min-height: 340px;
   }
   .offer-card {
-    flex-basis: clamp(280px, 46vw, 360px);
+    width: clamp(280px, 46vw, 360px);
   }
   .offer-media {
     height: 150px;
@@ -3543,7 +3549,7 @@ p {
     mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
   }
   .review-group .review-card {
-    flex-basis: 82vw;
+    width: 82vw;
   }
   .review-card {
     height: auto;
@@ -3556,7 +3562,7 @@ p {
     min-height: 280px;
   }
   .offer-card {
-    flex-basis: min(82vw, 340px);
+    width: min(82vw, 340px);
   }
   .offer-media {
     height: 156px;
