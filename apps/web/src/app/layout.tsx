@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Alegreya_Sans, Archivo } from "next/font/google";
+import { siteUrl } from "@/lib/site-url";
 import "../styles/site.css";
 
 const display = Alegreya_Sans({
@@ -12,8 +13,6 @@ const sans = Archivo({
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
 });
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
