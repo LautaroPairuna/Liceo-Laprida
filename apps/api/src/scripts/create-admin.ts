@@ -13,10 +13,23 @@ const prisma = new PrismaClient({ adapter: new PrismaMariaDb(env.DATABASE_URL) }
 
 try {
   const context = await createAuth(prisma).$context;
+  const hash = await context.password.hash(password);
   const existing = await context.internalAdapter.findUserByEmail(email);
   if (existing) {
-    console.error(`[admin] ya existe un usuario con ${email}`);
-    process.exitCode = 1;
+    // Si el usuario ya existe, le cambia la clave: sirve para recuperar el acceso.
+    const userId = existing.user.id;
+    if (await context.internalAdapter.findCredentialAccount(userId)) {
+      await context.internalAdapter.updatePassword(userId, hash);
+    } else {
+      await context.internalAdapter.linkAccount({
+        userId,
+        providerId: "credential",
+        accountId: userId,
+        password: hash,
+      });
+    }
+    await context.internalAdapter.deleteUserSessions(userId);
+    console.log(`[admin] clave actualizada: ${email}`);
   } else {
     const user = await context.internalAdapter.createUser(
       {
@@ -30,7 +43,7 @@ try {
       userId: user.id,
       providerId: "credential",
       accountId: user.id,
-      password: await context.password.hash(password),
+      password: hash,
     });
     console.log(`[admin] usuario creado: ${email}`);
   }

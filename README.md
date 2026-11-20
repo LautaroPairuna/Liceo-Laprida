@@ -18,6 +18,7 @@ npm install
 npm run db:migrate -w api        # aplica las migraciones
 npm run db:seed -w api           # carga contenido, cursos y fichas de ejemplo
 npm run admin:create -w api -- correo@dominio una-clave-larga "Nombre"
+# Si el correo ya existe, le cambia la clave (sirve para recuperar el acceso).
 npm run dev                      # API (:4000/api/health) y web (:3000) juntos
 # o por separado: npm run dev:api / npm run dev:web
 ```

@@ -6,6 +6,15 @@ import { type FormEvent, useId, useState } from "react";
 import { authClient } from "@/lib/admin-api";
 import { BrandMark } from "../brand-mark";
 
+// Solo el 401 es una clave equivocada; el resto son problemas del servidor y conviene
+// que se distingan, para no buscar el error en la clave.
+function loginError(status: number) {
+  if (status === 401) return "El correo o la contraseña no coinciden.";
+  if (status === 429) return "Demasiados intentos. Esperá un minuto.";
+  if (status === 403) return "El servidor rechazó el origen del pedido (revisá PUBLIC_SITE_URL).";
+  return `No se pudo iniciar sesión (error ${status}). Probá de nuevo en un rato.`;
+}
+
 export function LoginForm() {
   const titleId = useId();
   const router = useRouter();
@@ -22,11 +31,7 @@ export function LoginForm() {
       password: String(form.get("password")),
     });
     if (signInError) {
-      setError(
-        signInError.status === 429
-          ? "Demasiados intentos. Esperá un minuto."
-          : "El correo o la contraseña no coinciden.",
-      );
+      setError(loginError(signInError.status));
       setSending(false);
       return;
     }
